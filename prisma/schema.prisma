@@ -9,3 +9,68 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int           @id @default(autoincrement())
+  firstName     String?
+  lastName      String?
+  email         String?       @unique
+  address       String?
+  country       String?
+  image         String?
+  city          String?
+  phone         String?    
+  donations     Donation[]
+  rescues       Rescue[]
+}
+
+model Species {
+  id            Int           @id @default(autoincrement())
+  name          String
+  animals       Animal[]
+}
+
+model Animal {
+  id            Int           @id @default(autoincrement())
+  name          String?
+  breed         String?
+  dateOfBirth   DateTime?     //change to milliseconds on fend - date.n()
+  story         String
+  traits        String
+  requirements  String
+  gender        Gender?
+  images        Image[]
+  speciesId     Int
+  species       Species       @relation(fields: [speciesId], references: [id])
+  rescue        Rescue[]
+}
+
+model Image {
+  id            Int           @id @default(autoincrement())
+  image         String?
+  animalId      Int
+  animal        Animal        @relation(fields: [animalId], references:[id])
+}
+
+model Rescue {
+  id            Int           @id @default(autoincrement())
+  animalId      Int
+  userId        Int
+  user          User          @relation(fields: [userId], references:[id])
+  animal        Animal?       @relation(fields: [animalId], references:[id])
+}
+
+model Donation {
+  id            Int           @id @default(autoincrement())
+  amount        Int
+  appCredit     Int
+  donationDate  DateTime      @default(now())
+  userId        Int
+  user          User          @relation(fields: [userId], references:[id])
+}
+
+enum Gender {
+  male
+  female
+}
+
