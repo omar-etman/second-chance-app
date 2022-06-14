@@ -2,17 +2,17 @@ import { useUser } from '@supabase/supabase-auth-helpers/react';
 import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-// import { authState } from 'slices/auth.slice';
-// import { useAppDispatch, useAppSelector } from 'store/hook';
+import { authState } from 'slices/auth.slice';
+import { useAppDispatch, useAppSelector } from 'store/hook';
 
 
-type props = {};
+// type props = {};
 
 
-const LogIn: React.FC<props> = () => {
+const LogIn: React.FC = () => {
 
   const { user } = useUser();
-
+  const { fullUser } = useAppSelector(authState);
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -23,14 +23,14 @@ const LogIn: React.FC<props> = () => {
     const { user, session, error } = await supabase.auth.signIn({
       provider: 'google'
     });
-    router.push('/dashboard');
+    router.push('/home');
     console.log({ user, session, error });
   };
 
   console.log({ user, fullUser });
 
   if (user && !fullUser) {
-    router.push('/signup');
+    router.push('/signUp');
   } else if (user && fullUser) {
     router.push('/home'); 
   }
@@ -39,15 +39,16 @@ const LogIn: React.FC<props> = () => {
     <div className="grid sm:grid-cols-1 lg:grid-cols-3 ">
       <div className="flex items-center justify-center h-screen lg:col-span-1 md:col-span-1">
         <div className="px-4 h-80 ">
-          {/* <div>
+          <div>
             <Image
-              src="/images/logo.png"
+              src="/images/logo-2.png"
               alt="logo"
               width={300}
               height={100}
               objectFit="cover"
             />
-          </div> */}
+          </div>
+          <h1>Second Chance</h1>
           <div>
             <p className="pt-2 pb-2 text-4xl font-bold">
               Sign in to your account
@@ -67,8 +68,8 @@ const LogIn: React.FC<props> = () => {
 
       <div className="lg:col-span-2 md:col-span-2 relative h-[100vh] hidden lg:block">
         <Image
-          src="/images/signin.jpg"
-          alt="Picture of the author"
+          src="/images/login-poster.jpg"
+          alt="login poster"
           layout="fill"
           objectFit="cover"
         />

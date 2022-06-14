@@ -1,12 +1,17 @@
+import type { AppProps } from "next/app";
 import { UserProvider } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { Provider } from "react-redux";
+import store from 'store/index';
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <UserProvider supabaseClient={supabaseClient}>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </UserProvider>
   )
 }

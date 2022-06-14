@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User {
-  id            Int           @id @default(autoincrement())
+  id            String      @id     
   firstName     String?
   lastName      String?
-  email         String?       @unique
+  email         String       @unique
   address       String?
   country       String?
   image         String?
@@ -55,7 +55,8 @@ model Image {
 model Rescue {
   id            Int           @id @default(autoincrement())
   animalId      Int
-  userId        Int
+  userId        String
+  rescueDate    DateTime      @default(now())
   user          User          @relation(fields: [userId], references:[id])
   animal        Animal?       @relation(fields: [animalId], references:[id])
 }
@@ -65,7 +66,7 @@ model Donation {
   amount        Int
   appCredit     Int
   donationDate  DateTime      @default(now())
-  userId        Int
+  userId        String
   user          User          @relation(fields: [userId], references:[id])
 }
 

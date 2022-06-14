@@ -7,7 +7,7 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<User>
 ) {
-  //todo: add auth support
+
 
   switch (req.method) {
     case "POST":
@@ -20,20 +20,13 @@ export default async function handle(
 }
 
 async function createUser(req: NextApiRequest, res: NextApiResponse) {
- // console.log(req, res);
+
   try {
     const { user } = await getUser({ req, res });
     const { firstName, lastName, address, country, city, phone } = req.body;
     console.log(req.body);
     console.log(user);
-
-    // const exists = await prisma.user.findFirst({where: {id : user?.id}})
-
-    // if(exists){
-    //   //can update the users data with new info
-    //   return res.status(200).json({msg: "here is the user", exists})
-    // }
-
+    
     const data = user?.user_metadata;
     const newUser = await prisma.user.create({
       data: {
@@ -43,7 +36,7 @@ async function createUser(req: NextApiRequest, res: NextApiResponse) {
         firstName,
         lastName,
         address,
-        counrty,
+        country,
         city,
         phone
       },
