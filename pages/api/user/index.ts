@@ -38,7 +38,8 @@ async function createUser(req: NextApiRequest, res: NextApiResponse) {
     const newUser = await prisma.user.create({
       data: {
         id: user?.id!,
-        email: user?.email,
+        email: user?.email!,
+        //revisit that
         image: data?.avatar_url,
         firstName,
         lastName,
