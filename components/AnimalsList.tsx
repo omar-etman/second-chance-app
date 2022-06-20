@@ -25,6 +25,8 @@ const products = [
     },
     // More products...
   ]
+
+  //useSWR to fetch the animals who are not rescued
 const AnimalsList:React.FC = () => {
     return (
         <div className="bg-white">

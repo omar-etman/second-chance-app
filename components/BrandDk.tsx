@@ -6,14 +6,14 @@ const Brand: React.FC = () => {
     <div className='flex flex-row items-center justify-center'>
       <div className='relative w-auto h-auto'>
         <Image
-          src='/assets/images/logo-white.png'
+          src='/assets/images/logo.png'
           alt='brand'
           objectFit='contain'
           width={50}
           height={40}
         />
       </div>
-      <span className='ml-2 text-gray-100 text-1xl'>SECOND CHANCE</span>
+      <span className='ml-2 text-1xl'>SECOND CHANCE</span>
     </div>     
   )
 }

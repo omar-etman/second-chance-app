@@ -11,17 +11,18 @@ datasource db {
 }
 
 model User {
-  id            String      @id     
-  firstName     String?
-  lastName      String?
-  email         String       @unique
-  address       String?
-  country       String?
-  image         String?
-  city          String?
-  phone         String?    
-  donations     Donation[]
-  rescues       Rescue[]
+  id               String      @id     
+  firstName        String?
+  lastName         String?
+  email            String       @unique
+  address          String?
+  country          String?
+  image            String?
+  city             String?
+  phone            String?    
+  donations        Donation[]
+  rescues          Rescue[]
+  // adoptionRequests AdoptionRequest[]
 }
 
 model Species {
@@ -35,14 +36,15 @@ model Animal {
   name          String?
   breed         String?
   dateOfBirth   DateTime?     //change to milliseconds on fend - date.n()
-  story         String
-  traits        String
-  requirements  String
+  story         String?
+  traits        String?
+  requirements  String?
   gender        Gender?
   images        Image[]
   speciesId     Int
   species       Species       @relation(fields: [speciesId], references: [id])
   rescue        Rescue[]
+  // adoptionRequests AdoptionRequest[]
 }
 
 model Image {
@@ -51,6 +53,17 @@ model Image {
   animalId      Int
   animal        Animal        @relation(fields: [animalId], references:[id])
 }
+
+//suggestion 
+
+// model AdoptionRequest {
+//   id            Int           @id @default(autoincrement())
+//   animalId      Int
+//   userId        String
+//   rescueDate    DateTime      @default(now())
+//   user          User          @relation(fields: [userId], references:[id])
+//   animal        Animal?       @relation(fields: [animalId], references:[id])
+// }
 
 model Rescue {
   id            Int           @id @default(autoincrement())
