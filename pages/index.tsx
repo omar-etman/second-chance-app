@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import FeaturesList from 'components/FeaturesList';
 import Layout from 'components/Layout';
 import Image from 'next/image';
+import Link from 'next/link';
 import { authState } from 'slices/auth.slice';
 import {authFullUser} from 'slices/auth.slice';
 import { useAppDispatch, useAppSelector } from 'store/hook';
@@ -66,9 +67,16 @@ const Home: React.FC = () => {
         style = {{backgroundImage: `url('/assets/images/background-8.jpg')`}}
       >
         <blockquote className='w-4/5 font-light text-center text-gray-100 lg:text-9xl'>
-        {`“ If animals spoke, humanity would cry.”`}
+        {`“Sometimes, your pet picks you.”`}
         </blockquote>
-        <span className='text-3xl text-center text-white mt-9 mt-font-light'>― Manuj Rajput.</span>
+        <span className='text-3xl text-center text-white mt-9 mt-font-light'>– Julie Wenzel.</span>
+        <button className='p-9 transition-all bg-[#00939C] rounded-2xl duration:400 hover:bg-[#9C3E00] flex justify-center items-center my-8'>
+          <Link href='/rescue'>
+            <a className='text-2xl text-gray-100'>
+              Wanna meet your future pet ?
+            </a>
+          </Link>
+        </button>
       </div>
     </Layout>
   )

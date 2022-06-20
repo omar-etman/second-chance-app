@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-
+import FacebookIcon from '@mui/icons-material/Facebook';
 const FooterBrand: React.FC = () => {
   return (
     <div className='flex flex-row items-center justify-center'>
