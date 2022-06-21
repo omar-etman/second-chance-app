@@ -56,7 +56,7 @@ const Home: React.FC = () => {
       </div>
       <div className='flex flex-col items-center justify-center py-8 m-0 bg-[#00939C] w-full min-h-[35rem]'>
         <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Since what we aim to turn the world into rescuers we offer the following features</span>
-        {/* the services display component */}
+        {/* the features component */}
         <FeaturesList/>
       </div>
         {/* closing marker */}

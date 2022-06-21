@@ -5,7 +5,7 @@ import { features } from 'utils/featuresDisplay'
 
 const FeaturesList:React.FC = () => {
     return (
-      <div className="w-full lg:max-w-7xl lg:mx-auto lg:px-8">
+      <div className="w-[90%] lg:max-w-7xl lg:mx-auto lg:px-8">
         <div className="relative mt-8">
           <div className="relative w-full pb-6 -mb-6 overflow-x-auto">
             <ul
