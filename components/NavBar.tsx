@@ -34,7 +34,7 @@ const NavBar:React.FC = () => {
                         open
                           ? " text-gray-200 rotate-180 transition-all duration:200"
                           : " text-white transition-all duration:200",
-                        "ml-2 h-5 w-5 group-hover:text-gray-500"
+                        "ml-2 h-4 w-5 group-hover:text-gray-500"
                       )}
                       aria-hidden="true"
                     />

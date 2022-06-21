@@ -1,9 +1,10 @@
-import { Animal, Image, PrismaClient } from '@prisma/client'
+import { Animal, Image, PrismaClient,  } from '@prisma/client'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 // Fetch all posts (in /pages/api/posts.ts)
 const prisma = new PrismaClient()
 
-export default async function handle(req: { method: string; body: { name: any; images: any; species: any; breed: any; dateOfBirth: any; story: any; traits: any; requirements: any; gender: any } }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: (Animal & { images: Image[] })[]): void; new(): any } } }) {
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
 
     const animals = await prisma.animal.findMany({
@@ -33,7 +34,7 @@ export default async function handle(req: { method: string; body: { name: any; i
     for (let i=0; i<images.length; i++) {
         const image = await prisma.image.create({
             data: {
-                animalId: animal.id,
+                animalId: +animal.id,
                 image: images[i]
             }
         })

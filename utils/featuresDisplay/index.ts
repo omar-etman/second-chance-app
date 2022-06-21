@@ -8,7 +8,7 @@ export const features:Feature[] = [
       description:`we offer you an array of pet food stores & vetinary clinics 
       that we partner with based on a thorough reviewing process 
       , we are very picky on that account.`,
-      imageSrc:'/assets/images/navigation',
+      imageSrc:'/assets/images/navigation.jpg',
       imageAlt:'look for pet food stores & vets nearby.'
 
     },
@@ -20,7 +20,7 @@ export const features:Feature[] = [
       your pet or others to be in need 
       of a new home, in which case we'd 
       be grateful for your trust in us to handle this.`,
-      imageSrc:'/assets/images/adoptions',
+      imageSrc:'/assets/images/adoptions.jpg',
       imageAlt:'put an animal up for adoption'
     },
     {
@@ -28,7 +28,7 @@ export const features:Feature[] = [
       name:'SOS',
       href:'/sos',
       description:'We offer you the means to help an animal in need through providing you with the nearest on call clinic & more facilitations.',
-      imageSrc:'/assets/images/emergency',
+      imageSrc:'/assets/images/emergency.jpg',
       imageAlt:'our emergency support in case your pet on any other animal needs it'
     },
     {
