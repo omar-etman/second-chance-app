@@ -35,9 +35,9 @@ const AnimalsList:React.FC = () => {
     )  
   }
   return (
-    <div className="w-full bg-gray-100">
+    <div className="w-full bg-gray-100 pb-8">
       {/* to be turned to a dropdown component */}
-      <ul className='flex flex-col justify-center items-center lg:flex-row lg:justify-around w-full bg-[#502000]'>
+      {/* <ul className='flex flex-col justify-center items-center lg:flex-row lg:justify-around w-full bg-[#502000]'>
         {filters.map((filter) => (
           <li key={filter.key} className=' w-4/5 lg:w-[8rem]'>
             <button 
@@ -48,7 +48,7 @@ const AnimalsList:React.FC = () => {
             </button>  
           </li>
         ))}
-      </ul>
+      </ul> */}
       <div className="max-w-7xl mx-auto py-4 px-4 overflow-hidden sm:py-24 sm:px-6 lg:px-8">
         <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
           {data.map((animal) => (
