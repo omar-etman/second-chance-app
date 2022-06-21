@@ -43,9 +43,10 @@ const Home: React.FC = () => {
       >
         <span className='font-extrabold text-center text-gray-100 text-7xl lg:text-9xl opacity-[0.8]'>MORE CHAPTERS<br/>MORE BOOKS</span>
       </div>
-      <div className='flex items-center justify-center py-2 m-0 bg-[#9C3E00] w-full min-h-[35rem]'>
+      <div className='flex flex-col items-center justify-center py-2 m-0 bg-[#9C3E00] w-full min-h-[35rem]'>
         <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Here are some of our rescue stories...</span>
         {/* the rescues display component */}
+        <FeaturesList/>
       </div>
       {/* services marker */}
       <div 
@@ -55,7 +56,7 @@ const Home: React.FC = () => {
         <span className='font-extrabold text-center text-gray-100 text-7xl lg:text-9xl opacity-[0.8] w-4/5'>{`WE'VE GOT YOUR BACK`}</span>
       </div>
       <div className='flex flex-col items-center justify-center py-8 m-0 bg-[#00939C] w-full min-h-[35rem]'>
-        <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Since what we aim to turn the world into rescuers we offer the following features</span>
+        <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Since we aim to fill the world with rescuers we offer the following features</span>
         {/* the features component */}
         <FeaturesList/>
       </div>
