@@ -4,11 +4,8 @@ import { navRoutes} from '../utils/navTabs'
 import Link from 'next/link';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import NavBarDropDown from './NavBarDropDown';
+import {classNames} from '../utils/classNames'
 
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
-}
 const NavBar:React.FC = () => {
   return (
     <>

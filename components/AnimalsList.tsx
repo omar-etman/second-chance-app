@@ -1,71 +1,70 @@
-import React from 'react'
+import {useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import axios from 'axios';
+import useSWR from 'swr';
+import { Animal } from '@prisma/client';
+import { CircularProgress } from '@mui/material';
+import AnimalCard from './AnimalCard'
 
-const products = [
-    {
-      id: 1,
-      name: 'Basic Tee 8-Pack',
-      href: '#',
-      price: '$256',
-      description: 'Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.',
-      options: '8 colors',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg',
-      imageAlt: 'Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.',
-    },
-    {
-      id: 2,
-      name: 'Basic Tee',
-      href: '#',
-      price: '$32',
-      description: 'Look like a visionary CEO and wear the same black t-shirt every day.',
-      options: 'Black',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg',
-      imageAlt: 'Front of plain black t-shirt.',
-    },
-    // More products...
-  ]
+const filters = [
+  {key:0, name:'all'},
+  {key:1, name: 'Dogs'},
+  {key:2, name: 'Cats'},
+  {key:3, name: 'Birds'},
+  {key:4, name: 'Reptiles'}
+]
+const fetchAnimals = (url:string) => axios.get(url).then((res) => res.data)
 
-  //useSWR to fetch the animals who are not rescued
 const AnimalsList:React.FC = () => {
+  const { data, error } = useSWR(`/api/animals`, fetchAnimals);
+  //need a useState hook to handle the filtering
+  const [filter, setFilter] = useState('All')
+
+  const filterBy = (name) => {
+    e.preventDefault
+    setFilter(name)
+  }
+
+  if(!data) {
+
     return (
-        <div className="bg-white">
-          <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <h2 className="sr-only">Products</h2>
-    
-            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="relative flex flex-col overflow-hidden bg-white border border-gray-200 rounded-lg group"
-                >
-                  <div className="relative bg-gray-200 aspect-w-3 aspect-h-4 group-hover:opacity-75 sm:aspect-none sm:h-96">
-                    <Image
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
-                      className="object-center w-full h-full sm:w-full sm:h-full"
-                      objectFit='cover'
-                    />
-                  </div>
-                  <div className="flex flex-col flex-1 p-4 space-y-2">
-                    <h3 className="text-sm font-medium text-gray-900">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                      </a>
-                    </h3>
-                    <p className="text-sm text-gray-500">{product.description}</p>
-                    <div className="flex flex-col justify-end flex-1">
-                      <p className="text-sm italic text-gray-500">{product.options}</p>
-                      <p className="text-base font-medium text-gray-900">{product.price}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )
+        <div className='flex justify-center items-center w-full h-[100vh]'>
+            <CircularProgress color="inherit" className='w-[12rem]'/>
+      </div> 
+    )  
+  }
+  return (
+    <div className="w-full bg-gray-100">
+      {/* to be turned to a dropdown component */}
+      <ul className='flex flex-col justify-center items-center lg:flex-row lg:justify-around w-full bg-[#502000]'>
+        {filters.map((filter) => (
+          <li key={filter.key} className=' w-4/5 lg:w-[8rem]'>
+            <button 
+              className='p-5  transition-all duration-600 text-gray-300 hover:text-white text-3xl font-light  w-full self-center mb-4'
+              // onClick={setFilter(filter.name)}
+            >
+              <span className='text-center'>{filter.name}</span>
+            </button>  
+          </li>
+        ))}
+      </ul>
+      <div className="max-w-7xl mx-auto py-4 px-4 overflow-hidden sm:py-24 sm:px-6 lg:px-8">
+        <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+          {data.map((animal) => (
+            <li key={animal.id}>
+              <AnimalCard
+                animal={animal}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
 }
 
 export default AnimalsList
+
+
+

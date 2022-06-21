@@ -63,3 +63,6 @@
                 </>
               )}
             </Popover> */}
+
+
+            // className="relative bg-gray-200 aspect-w-3 aspect-h-1 group-hover:opacity-75 sm:aspect-none sm:h-96 transition-all duration:300"

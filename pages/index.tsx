@@ -1,5 +1,3 @@
-import { useUser } from '@supabase/supabase-auth-helpers/react';
-import { createClient } from '@supabase/supabase-js';
 import FeaturesList from 'components/FeaturesList';
 import Layout from 'components/Layout';
 import Image from 'next/image';

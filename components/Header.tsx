@@ -6,6 +6,8 @@ import { resources, navRoutes, authRoutes } from "../utils/navTabs/index";
 import MobileDropDown from "./MobileDropDown";
 import NavBar from "./NavBar";
 import NavAuthButtons from "./NavAuthButtons";
+import { useUser } from '@supabase/supabase-auth-helpers/react';
+import NavUserButton from "./NavUserButton";
 
 const Header: React.FC = () => {
   return (
@@ -30,6 +32,7 @@ const Header: React.FC = () => {
           </div>
           <NavBar/>
           <NavAuthButtons/>
+          {/* <NavUserButton/> */}
         </div>
       </div>
       <MobileDropDown 
