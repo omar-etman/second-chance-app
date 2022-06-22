@@ -57,9 +57,9 @@ const Signup: React.FC = () => {
     <div className="grid sm:grid-cols-1 lg:grid-cols-3 ">
       <div className="flex items-center justify-center lg:col-span-1 md:col-span-1 ">
         <div className="mt-0 md:mt-[2.5rem]">
-          <div className='relative w-full h-30 mb-5 mt-5'>
+          <div className='relative w-full mt-5 mb-5 h-30'>
             <Image
-              src="/assets/images/logo-2.png"
+              src="/assets/images/logo.png"
               alt="logo"
               width={300}
               height={100}

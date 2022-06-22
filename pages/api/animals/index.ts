@@ -1,4 +1,4 @@
-import { Animal, Image, PrismaClient,  } from '@prisma/client'
+import { Animal, Image, PrismaClient, Species  } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 // Fetch all posts (in /pages/api/posts.ts)
@@ -8,7 +8,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   if (req.method === 'GET') {
 
     const animals = await prisma.animal.findMany({
-      include: { images: true, rescue:true },
+      include: { images: true, species: true ,rescue:true },
     })
 
     if (animals.length == 0) {

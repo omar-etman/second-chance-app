@@ -1,11 +1,10 @@
-import {useState} from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import {useEffect, useState} from 'react'
 import axios from 'axios';
 import useSWR from 'swr';
-import { Animal } from '@prisma/client';
 import { CircularProgress } from '@mui/material';
 import AnimalCard from './AnimalCard'
+import { Animal, Image as AnimPic } from '@prisma/client';
+import Loader from './Loader';
 
 const filters = [
   {key:0, name:'all'},
@@ -17,7 +16,8 @@ const filters = [
 const fetchAnimals = (url:string) => axios.get(url).then((res) => res.data)
 
 const AnimalsList:React.FC = () => {
-  const { data, error } = useSWR(`/api/animals`, fetchAnimals);
+  let { data, error } = useSWR(`/api/animals`, fetchAnimals);
+  //a condition to use qhich swr
   //need a useState hook to handle the filtering
   const [filter, setFilter] = useState('All')
 
@@ -25,17 +25,24 @@ const AnimalsList:React.FC = () => {
     setFilter(name)
   }
 
-  if(!data) {
+  useEffect(() => {
+    // if(filter === 'All'){
+    //   return data.filter
+    // }
+  },[]);
 
-    return (
-        <div className='flex justify-center items-center w-full h-[100vh]'>
-            <CircularProgress color="inherit" className='w-[12rem]'/>
-      </div> 
-    )  
+  // type animal = {
+  //   animal : (Animal & {
+  //     images: AnimPic[];
+  // }) | null
+  // }
+
+  if(!data) {
+    return <Loader/>
   }
   return (
     <div className="w-full pb-8 bg-gray-100">
-      {/* to be turned to a dropdown component */}
+      {/* to be turned to a dropdown component & algolia*/}
       {/* <ul className='flex flex-col justify-center items-center lg:flex-row lg:justify-around w-full bg-[#502000]'>
         {filters.map((filter) => (
           <li key={filter.key} className=' w-4/5 lg:w-[8rem]'>
@@ -48,10 +55,12 @@ const AnimalsList:React.FC = () => {
           </li>
         ))}
       </ul> */}
+      {/* animal data type */}
       <div className="px-4 py-4 mx-auto overflow-hidden max-w-7xl sm:py-24 sm:px-6 lg:px-8">
         <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-          {data.map((animal:Animal) => (
-            <li key={animal.id}>
+          {data.map((animal: (Animal & {
+        images: AnimPic[] }) | null) => (
+            <li key={animal?.id}>
               <AnimalCard
                 animal={animal}
               />

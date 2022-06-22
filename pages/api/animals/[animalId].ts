@@ -12,7 +12,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
     const animal = await prisma.animal.findFirst({
       where: { id: +animalId },
-      include: { images: true },
+      include: { images: true, species: true },
     })
 
     if (!animal) {

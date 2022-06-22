@@ -45,10 +45,8 @@ const Home: React.FC = () => {
       </div>
       <div className='flex flex-col items-center justify-center py-2 m-0 bg-[#9C3E00] w-full min-h-[35rem]'>
         <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Here are some of our rescue stories...</span>
-        {/* the rescues display component */}
         <FeaturesList/>
       </div>
-      {/* services marker */}
       <div 
         className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[40rem] p-0"
         style = {{backgroundImage: `url('/assets/images/background-4.jpg')`}}
@@ -57,12 +55,10 @@ const Home: React.FC = () => {
       </div>
       <div className='flex flex-col items-center justify-center py-8 m-0 bg-[#00939C] w-full min-h-[35rem]'>
         <span className='mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]'>Since we aim to fill the world with rescuers we offer the following features</span>
-        {/* the features component */}
         <FeaturesList/>
       </div>
-        {/* closing marker */}
       <div 
-        className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] p-0"
+        className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] md:h-[50rem] lg:h-[40rem] p-0"
         style = {{backgroundImage: `url('/assets/images/background-8.jpg')`}}
       >
         <blockquote className='w-4/5 font-light text-center text-gray-100 lg:text-9xl'>

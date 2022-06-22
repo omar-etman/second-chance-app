@@ -48,13 +48,13 @@ const Rescue: React.FC = () => {
         </p> */}
       </div>
       <div className="flex flex-col items-center justify-center pt-8 m-0 bg-[#00939C] w-full min-h-[35rem]">
-        <span className="mb-6 text-center w-4/5 text-4xl font-bold text-gray-100">
+        <span className="w-4/5 mb-6 text-4xl font-bold text-center text-gray-100">
           Meet the current Second Chance household
         </span>
         <AnimalsList />
       </div>
       <div 
-        className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] p-0"
+        className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] md:h-[50rem] lg:h-[40rem] p-0"
         style = {{backgroundImage: `url('/assets/images/rescue-background-2.jpg')`}}
       >
         <blockquote className='w-4/5 font-light text-center text-gray-100 lg:text-6xl'>

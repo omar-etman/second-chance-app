@@ -1,3 +1,4 @@
+import { Animal, Gender, Image as AnimPic } from '@prisma/client';
 import { SVGProps } from "react";
 
 //header nav arrays
@@ -35,5 +36,37 @@ export type Feature = {
 
 
 //------------------------------------
+//data--------------------------------
 
+export type AnimPicsData = {
+    images:AnimPic[] | null
+    name:string | null
+}
+
+export type AnimalData = {
+    animal : (Animal & {
+        images: AnimPic[];
+    }) | null
+}
+
+export type Pet = {
+    id: number;
+    name: string | null;
+    breed: string | null;
+    dateOfBirth: Date | null;
+    story: string | null;
+    traits: string | null;
+    requirements: string | null;
+    gender: Gender | null;
+    speciesId: number;
+    images:Picture[]
+    
+}
+
+export type Picture = {
+    id: number;
+    image: string | null;
+    animalId: number;
+    images:AnimPic[]
+}
 
