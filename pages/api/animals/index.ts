@@ -1,4 +1,4 @@
-import { Animal, Image, PrismaClient, Species  } from '@prisma/client'
+import {PrismaClient} from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 // Fetch all posts (in /pages/api/posts.ts)

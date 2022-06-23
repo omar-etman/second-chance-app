@@ -13,7 +13,7 @@ export const resources:Resources = [
       key: 1,
       name: "Put an animal up for adoption",
       description: `Send us the pet's info and we'll added to our database and keep you posted. rest assured our users are trustworthy animal lovers like yourself.`,
-      href: "/putforadoption",
+      href: "/adoption",
       icon: GiftIcon,
     },
     {
@@ -26,7 +26,7 @@ export const resources:Resources = [
     },
     {
       key: 3,
-      name: "donate",
+      name: "Donate",
       description:
         "The help you can offer would do so much good & will gain credits to be used in return. Tap in to understand more",
       href: "/donate",
@@ -37,7 +37,7 @@ export const resources:Resources = [
       name: "Help center",
       description:
         "in case you need help regarding a situation related to your pet be it a health issue or an inquiry or to contact us regarding any needed info.",
-      href: "#",
+      href: "/help",
       icon: SupportIcon,
     },
   ];

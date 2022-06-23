@@ -2,6 +2,8 @@ import AnimalsList from "components/AnimalsList";
 import Layout from "components/Layout";
 import React from "react";
 import Link from 'next/link'
+import FadeInTrans2 from "components/transitions/FadeInTrans2";
+import FadeInTrans1 from "components/transitions/FadeInTrans1";
 
 const Rescue: React.FC = () => {
   return (
@@ -12,17 +14,24 @@ const Rescue: React.FC = () => {
           backgroundImage: `url('/assets/images/rescue-background-1.jpg')`,
         }}
       >
+        
         <span className="mb-6 text-center w-4/5 text-4xl font-bold text-gray-100 opacity-[0.9]">
-          We are resuers for life and we love it
+          <FadeInTrans2>
+        We are resuers for life and we love it
+            
+          </FadeInTrans2>
+
         </span>
         <p className="w-4/5 text-2xl font-light text-center text-white">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-          consectetur at nemo saepe! Ullam reprehenderit, voluptatibus nisi quae
-          voluptas quasi nihil architecto qui rem voluptates dolorum quas neque
-          animi, iusto maxime iure itaque ab tempora eius quia nesciunt porro
-          repellendus!
+          <FadeInTrans1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            consectetur at nemo saepe! Ullam reprehenderit, voluptatibus nisi quae
+            voluptas quasi nihil architecto qui rem voluptates dolorum quas neque
+            animi, iusto maxime iure itaque ab tempora eius quia nesciunt porro
+            repellendus!
+          </FadeInTrans1>
         </p>
-
+          
         {/* conditionally rendered if there is no login session */}
         {/* <p className="w-4/5 text-2xl font-light text-center text-white mt-9">
           note that you can see our currently accomodated friends but to be able to take action we need you to

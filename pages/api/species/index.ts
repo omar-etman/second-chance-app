@@ -1,8 +1,9 @@
 import { Animal, PrismaClient, Species } from '@prisma/client'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 const prisma = new PrismaClient()
 
-export default async function handle(req: { method: string }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: (Species & { animals: Animal[] })[]): void; new(): any } } }) {
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
 
     const species = await prisma.species.findMany({
@@ -16,3 +17,4 @@ export default async function handle(req: { method: string }, res: { status: (ar
     res.status(200).json(species)
   } 
 }
+

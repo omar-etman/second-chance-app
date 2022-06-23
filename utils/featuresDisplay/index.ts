@@ -15,7 +15,7 @@ export const features:Feature[] = [
     {
       key:2,
       name:'Adoptions',
-      href:'/adopt',
+      href:'/adoption',
       description: `Reasons can vary to cause a need for 
       your pet or others to be in need 
       of a new home, in which case we'd 

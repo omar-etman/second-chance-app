@@ -2,7 +2,9 @@ import React from 'react'
 
 function AdoptionForm() {
   return (
-    <div>AdoptionForm</div>
+    <div className='text-black bg-gray-200'>
+
+    </div>
   )
 }
 
