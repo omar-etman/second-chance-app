@@ -25,7 +25,7 @@ const LogIn: React.FC = () => {
     const { user, session, error } = await supabase.auth.signIn({
       provider: 'google'
     });
-    router.push('/home');
+    router.push('/');
     console.log({ user, session, error });
   };
 

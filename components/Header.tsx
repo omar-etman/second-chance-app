@@ -10,6 +10,11 @@ import { useUser } from '@supabase/supabase-auth-helpers/react';
 import NavUserButton from "./NavUserButton";
 
 const Header: React.FC = () => {
+
+  const { user } = useUser();
+
+  console.log(user)
+  
   return (
     <Popover className="w-full ">
       <div className="px-4 mx-auto max-w-7xl sm:px-6">
@@ -31,8 +36,12 @@ const Header: React.FC = () => {
             </Popover.Button>
           </div>
           <NavBar/>
-          <NavAuthButtons/>
-          {/* <NavUserButton/> */}
+          {
+            user
+            ?<NavUserButton/>
+            :<NavAuthButtons/>
+          }
+          
         </div>
       </div>
       <MobileDropDown 

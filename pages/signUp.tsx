@@ -42,7 +42,7 @@ const Signup: React.FC = () => {
       phone: Yup.string().required('this input is required')
     })
   });
-
+  console.log(authFullUser)
   const formMapper = [
     {key:1, name:'firstName',formValue:formik.values.firstName, label:`First name`, type:'string', placeholder:`i.e John`},
     {key:2, name:'lastName',formValue:formik.values.lastName, label:`Last name`, type:'string', placeholder:`i.e Doe`},
@@ -54,15 +54,15 @@ const Signup: React.FC = () => {
 
 
   return (
-    <div className="grid sm:grid-cols-1 lg:grid-cols-3 ">
-      <div className="flex items-center justify-center lg:col-span-1 md:col-span-1 ">
-        <div className="mt-0 md:mt-[2.5rem]">
-          <div className='relative w-full mt-5 mb-5 h-30'>
+    <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col items-center justify-center lg:col-span-1 md:col-span-1 ">
+        <div className="mt-0 md:mt-[2.5rem] w-4/5">
+          <div className='relative flex flex-row items-center justify-center w-full mt-5 mb-5 h-30'>
             <Image
-              src="/assets/images/logo.png"
+              src="/assets/images/logo-white.png"
               alt="logo"
-              width={300}
-              height={100}
+              width={120}
+              height={120}
               objectFit="contain"
             />
           </div>
@@ -74,7 +74,7 @@ const Signup: React.FC = () => {
               {
                 formMapper.map((f) => (
                   <div className="mb-6" key={f.key}>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                    <label className="block mb-2 text-sm font-medium text-gray-100 ">
                       {f.label}
                     </label>
                         <input
@@ -95,7 +95,7 @@ const Signup: React.FC = () => {
 
               <button
                 type="submit"
-                className="text-white bg-gray-700 focus:outline-none  font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-700 self-center w-full mb-5 "
+                className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-700 self-center w-full mb-5 "
                 onClick={(e) => {
                   e.preventDefault();
                   formik.handleSubmit();
@@ -108,7 +108,7 @@ const Signup: React.FC = () => {
         </div>
       </div>
 
-      <div className="lg:col-span-2 md:col-span-2 relative h-[100%] hidden lg:block">
+      <div className="lg:col-span-2 md:col-span-1 relative h-[100%] hidden md:block">
         <Image
           src="/assets/images/signup-poster.jpg"
           alt="Picture of the author"
@@ -121,3 +121,6 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
+
+
+//className="lg:col-span-2 md:col-span-1 relative h-[100%] hidden md:block bg-fixed bg-center bg-no-repeat bg-cover" style = {{backgroundImage: `url('/assets/images/signup-poster.jpg')`}}
