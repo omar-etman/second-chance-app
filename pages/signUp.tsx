@@ -2,10 +2,8 @@ import Image from 'next/image';
 import { useFormik, yupToFormErrors } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { User } from '@prisma/client';
-import { useEffect } from 'react';
 import { authFullUser } from 'slices/auth.slice';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 
@@ -95,7 +93,7 @@ const Signup: React.FC = () => {
 
               <button
                 type="submit"
-                className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-700 self-center w-full mb-5 "
+                className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-700 self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00] "
                 onClick={(e) => {
                   e.preventDefault();
                   formik.handleSubmit();
