@@ -4,6 +4,7 @@ import useSWR from "swr";
 import AnimalCard from "./AnimalCard";
 import AnimalsFilter from "./AnimalsFilter";
 import { Animal, Image as AnimPic } from "@prisma/client";
+import {species} from '../utils/AnimalFilter'
 import Loader from "./Loader";
 
 

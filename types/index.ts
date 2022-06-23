@@ -32,6 +32,22 @@ export type Feature = {
     imageSrc:string;
     imageAlt:string;
 }
+//------------------------------------
+//animal species filter tabs
+
+export type Sp = {
+    key: number;
+    name: string;
+    species: string;
+    imageUrl: string;
+}
+
+export type SpeciesTabs = {
+    key: number;
+    name: string;
+    species: string;
+    imageUrl: string;
+}[]
 
 
 

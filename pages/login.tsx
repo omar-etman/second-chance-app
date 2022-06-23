@@ -8,6 +8,9 @@ import {authFullUser} from 'slices/auth.slice';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import useSWR from 'swr';
 import axios from 'axios';
+import FadeInTrans3 from 'components/transitions/FadeInTrans3';
+import FadeInTrans2 from 'components/transitions/FadeInTrans2';
+import FadeInTrans1 from 'components/transitions/FadeInTrans1';
 
 
 // type props = {};
@@ -62,6 +65,8 @@ const LogIn: React.FC = () => {
         <div className="px-4 mb-[2rem]">
         <div className='flex flex-col items-center justify-center mb-[2.5rem]'>
             <div className='relative mb-2 h-25'>
+              <FadeInTrans1>
+                
                 <Image
                 src="/assets/images/logo-white.png"
                 alt="logo"
@@ -69,12 +74,17 @@ const LogIn: React.FC = () => {
                 height={170}
                 objectFit="contain"
                 />
+              </FadeInTrans1>
             </div>
             <span className='text-center font-thin text-[2.5rem]'>
-              Second Chance
+              <FadeInTrans2>
+              Second Chance 
+              </FadeInTrans2>
             </span>
-            <p className='font-light text-center text-[1.2rem]'>
-              we rescue them ... they save us.
+            <p className='font-light text-center text-[1.2rem] leading-0'>
+              <FadeInTrans3>
+                we rescue them ... they save us. 
+              </FadeInTrans3>
             </p>
             {/* <p className='font-[0.3rem]'>we rescue them ... they save us</p> */}
         </div>

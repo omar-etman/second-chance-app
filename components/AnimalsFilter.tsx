@@ -1,29 +1,30 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Combobox, RadioGroup } from "@headlessui/react";
 import { classNames } from "utils/classNames";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/outline";
 import Image from "next/image";
-const species = [
-  { key: 0, name: "all", species: "all", imageUrl:'/assets/images/' },
-  { key: 1, name: "Dogs", species: "dog" },
-  { key: 2, name: "Cats", species: "cat" },
-  { key: 3, name: "Birds", species: "bird" },
-  { key: 4, name: "Reptiles", species: "reptile" },
-];
+import {species} from '../utils/AnimalFilter'
+import { Sp, SpeciesTabs } from "types";
+
 
 type props = {
-  filterBy: string
+  filterBy: String
   setFilterBy: Dispatch<SetStateAction<string>>
 }
 
 const AnimalsFilter: React.FC<props> = ({filterBy, setFilterBy}) => {
   const [sp, setSelectedSp] = useState(species[0]);
   const [query, setQuery] = useState("");
-  const selectionHandler = (e: { target: { value: SetStateAction<{ key: number; name: string; species: string; }>; }; }) => {
-    setSelectedSp(e.target.value)
+  
+  const speciesSelector = () => {
+    setFilterBy(sp.species)
   }
-
-
+  
+  useEffect(() => {
+    setFilterBy(sp.species)
+    console.log(filterBy)
+  },[filterBy, setFilterBy, sp.species])
+  
   const filteredSpecies =
     query === ""
       ? species
@@ -36,7 +37,7 @@ const AnimalsFilter: React.FC<props> = ({filterBy, setFilterBy}) => {
       <Combobox.Label className="block text-sm font-medium text-gray-700">Assigned to</Combobox.Label>
       <div className="relative mt-1">
         <Combobox.Input
-          className="w-full py-2 pl-3 pr-10 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-10 bg-white border border-gray-300 rounded-md shadow-sm focus:border-orange-700 focus:outline-none focus:ring-1 focus:ring-orange-900 sm:text-sm"
           onChange={(event) => setQuery(event.target.value)}
           displayValue={(sp: { name: string; }) => sp?.name}
         />
@@ -53,22 +54,24 @@ const AnimalsFilter: React.FC<props> = ({filterBy, setFilterBy}) => {
                 className={({ active }) =>
                   classNames(
                     'relative cursor-default select-none py-2 pl-3 pr-9',
-                    active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                    active ? 'bg-teal-300 text-white' : 'text-gray-900'
                   )
                 }
               >
                 {({ active, selected }) => (
                   <>
-                    {/* <div className="flex items-center">
-                      <Image src={person.imageUrl} alt="" layout='fill' className="flex-shrink-0 w-6 h-6 rounded-full" />
-                      <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{person.name}</span>
-                    </div> */}
+                    <div className="flex flex-row-reverse items-center justify-between">
+                      <div className="relative flex-shrink-0 w-6 h-6 rounded-full">
+                        <Image src={sp.imageUrl} alt="" layout='fill' objectFit='cover'className="overflow-hidden"/> 
+                      </div>
+                      <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{sp.name}</span>
+                    </div>
 
                     {selected && (
                       <span
                         className={classNames(
                           'absolute inset-y-0 right-0 flex items-center pr-4',
-                          active ? 'text-white' : 'text-indigo-600'
+                          active ? 'text-white' : 'text-orange-900'
                         )}
                       >
                         <CheckIcon className="w-5 h-5" aria-hidden="true" />

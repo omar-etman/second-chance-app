@@ -38,16 +38,16 @@ const Home: React.FC = () => {
             />
           </div>
         </FadeInTrans1>
-        <FadeInTrans2>
           <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] mt-1 text-white">
+        <FadeInTrans2>
             SECOND CHANCE
-          </h1>
         </FadeInTrans2>
-        <FadeInTrans3>
+          </h1>
           <span className="text-[1.5rem] font-light text-white mt-0 mb-[9.5rem] leading-0 lg:mb-[5.5rem]">
+        <FadeInTrans3>
             we rescue them ... they save us.
-          </span>  
         </FadeInTrans3>
+          </span>  
       </div>
       {/* {intro section} */}
       <div className="min-h-[30rem] bg-[#00939C] py-9 w-full flex flex-col justify-center items-center">
