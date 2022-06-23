@@ -1,89 +1,77 @@
-import { Disclosure, RadioGroup, Tab } from '@headlessui/react'
-import { StarIcon } from '@heroicons/react/solid'
-import { HeartIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/outline'
-import { classNames } from 'utils/classNames'
-import { AnimalData } from 'types'
-import ImageSelector from './ImageSelector'
-import Loader from './Loader'
-import { dateFormat, ageDisplay, getMonthDifference } from 'utils/dateFormats'
-import { date } from 'yup'
-import { Animal } from '@prisma/client'
-import AnimalDetails from './AnimalDetails'
-import { useState } from 'react'
-import AnimalRescueDialog from './AnimalRescueDialog'
+import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { StarIcon } from "@heroicons/react/solid";
+import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
+import { classNames } from "utils/classNames";
+import { AnimalData } from "types";
+import ImageSelector from "./ImageSelector";
+import Loader from "./Loader";
+import { dateFormat, ageDisplay, getMonthDifference } from "utils/dateFormats";
+import { date } from "yup";
+import { Animal } from "@prisma/client";
+import AnimalDetails from "./AnimalDetails";
+import { useState } from "react";
+import AnimalRescueDialog from "./AnimalRescueDialog";
 
+type props = {};
 
-
-type props = {
-    
-}
-
-
-const AnimalInfo:React.FC<AnimalData> = ({animal}) => {
-
+const AnimalInfo: React.FC<AnimalData> = ({ animal }) => {
   // const age = (animal: { dateOfBirth: Date | number | null }) => {
   //   if(!animal) {
   //     console.log('date error')
-  //     return 
+  //     return
   //   }
-  //   const today = dateFormat(Date.now(), 'MM-dd-yyyy') 
-  //   const date1 = dateFormat(animal!.dateOfBirth!, 'MM-dd-yyyy') 
+  //   const today = dateFormat(Date.now(), 'MM-dd-yyyy')
+  //   const date1 = dateFormat(animal!.dateOfBirth!, 'MM-dd-yyyy')
   //   const date2 = today
   //   return getMonthDifference(date1, date2)
   // }
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const openDialog = () => {
-    setOpen(true)
-  }
-  const traits = animal!.traits!
-  const requirements = animal!.requirements!
-  
-  const splitter = (str:string | null) => {
-    if(!str){
-      return []
-    }
-    return str.split(',')
-  }
+    setOpen(true);
+  };
+  const traits = animal!.traits!;
+  const requirements = animal!.requirements!;
 
-  const traitsArray = splitter(animal!.traits!)
-  const requirementsArray = splitter(animal!.requirements!)
-  
-  
+  const splitter = (str: string | null) => {
+    if (!str) {
+      return [];
+    }
+    return str.split(",");
+  };
+
+  const traitsArray = splitter(animal!.traits!);
+  const requirementsArray = splitter(animal!.requirements!);
+
   const details = () => {
     return [
       {
-        key:1,
-        name:'Traits',
-        items:traitsArray
+        key: 1,
+        name: "Traits",
+        items: traitsArray,
       },
       {
-        key:2,
-        name:'Requirements',
-        items:requirementsArray
+        key: 2,
+        name: "Requirements",
+        items: requirementsArray,
       },
-      
-    ]
-  }
+    ];
+  };
 
   if (!animal) {
-    return <Loader/>
+    return <Loader />;
   }
 
   return (
-
+    <>
+      <AnimalRescueDialog open={open} setOpen={setOpen} />
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <AnimalRescueDialog
-          open={open}
-          setOpen={setOpen}
-        />
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-          <ImageSelector
-             images={animal!.images}
-             name={animal?.name}
-          />
+          <ImageSelector images={animal!.images} name={animal?.name} />
           {/* animal info */}
           <div className="px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-100">{animal.name}</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-100">
+              {animal.name}
+            </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">{`animal's`} breed</h2>
@@ -95,7 +83,11 @@ const AnimalInfo:React.FC<AnimalData> = ({animal}) => {
 
               <div
                 className="space-y-6 text-base font-light text-gray-100"
-                dangerouslySetInnerHTML={{ __html: animal.story || `${animal.name}'s story is yet to be provided` }}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    animal.story ||
+                    `${animal.name}'s story is yet to be provided`,
+                }}
               />
             </div>
 
@@ -104,11 +96,9 @@ const AnimalInfo:React.FC<AnimalData> = ({animal}) => {
                 Additional details
               </h2>
 
-              <AnimalDetails
-                details={details()}
-              />
+              <AnimalDetails details={details()} />
             </section>
-            
+
             <div className="flex mt-10 sm:flex-col1">
               <button
                 onClick={openDialog}
@@ -120,8 +110,8 @@ const AnimalInfo:React.FC<AnimalData> = ({animal}) => {
           </div>
         </div>
       </div>
+    </>
+  );
+};
 
-  )
-}
-
-export default AnimalInfo
+export default AnimalInfo;

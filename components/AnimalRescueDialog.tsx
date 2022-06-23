@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 type props = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -10,10 +11,25 @@ type props = {
 const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);
   const router = useRouter()
+  const user = useUser()
+  const animalId = router.query
+  
+  
+  const rescue = () => {
+    
+  }
+  
   const routeToHome = () => {
     setOpen(false)
     router.push('/')
     
+  }
+
+  const noUserButtons = () => {
+    return(
+        <>
+        </>
+    )
   }
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -64,14 +80,19 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      Looks like the start of a new friendship!
+                      { 
+                        user
+                        ?`Looks like the start of a new friendship!`
+                        :`you need to log in to your account first`  
+                      }
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Eius aliquam laudantium explicabo pariatur iste
-                        dolorem animi vitae error totam. At sapiente aliquam
-                        accusamus facere veritatis.
+                        {
+                            user
+                            ?`you picked a hell of friend today, on proceeding we will contact you for further details, till then that friend would be booked for you. Shall we do so?`
+                            :`this a hell of a friend to have and we're sure luck plays for both sides her , but first we need you logged in or signed up if you don't have an account, we'd be so happy to have you on board.`
+                        }
                       </p>
                     </div>
                   </div>
@@ -83,14 +104,14 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
                     onClick={routeToHome}
                     ref={cancelButtonRef}
                   >
-                    Back to Home
+                    Yes
                   </button>
                   <button
                     type="button"
                     className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
-                    Great
+                    Will consider
                   </button>
                 </div>
               </Dialog.Panel>

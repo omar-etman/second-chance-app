@@ -45,6 +45,7 @@ model Animal {
   species       Species       @relation(fields: [speciesId], references: [id])
   rescue        Rescue[]
   // adoptionRequests AdoptionRequest[]
+  // the rescue data handling needs revisiting
 }
 
 model Image {
@@ -67,11 +68,11 @@ model Image {
 
 model Rescue {
   id            Int           @id @default(autoincrement())
-  animalId      Int
+  animalId      Int?
   userId        String
   rescueDate    DateTime      @default(now())
   user          User          @relation(fields: [userId], references:[id])
-  animal        Animal?       @relation(fields: [animalId], references:[id])
+  animal        Animal?      @relation(fields: [animalId], references:[id])
 }
 
 model Donation {
