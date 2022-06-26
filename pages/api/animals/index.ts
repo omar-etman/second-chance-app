@@ -8,7 +8,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   if (req.method === 'GET') {
 
     const animals = await prisma.animal.findMany({
-      include: { images: true, species: true ,rescue:true },
+      include: { images: true, species: true, Rescue: true },
     })
 
     if (animals.length == 0) {

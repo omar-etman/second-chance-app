@@ -21,20 +21,19 @@ const catPage = {
 
 const birdPage = {
     bg:'/assets/images/bird-background.jpg',
-    quote:``,
-    by:``
+    quote:`“I’d rather learn from one bird how to sing than teach ten thousand stars how not to dance.”`,
+    by:`-E. E. Cummings`
 }
 
 const reptilePage = {
     bg:'/assets/images/reptile-background.jpg',
-    quote:``,
-    by:``
+    quote:`“I feel more human when I compare the cuteness of a lizard to a newborn child's sweetness. Both are God's creations filled with precious innocence”`,
+    by:`-Munia Khan`
 }
 
 const buttons = [
-    {key:1,  text:'Back', href:'/'},
-    {key:2, text:'Donate', href:'/donate'},
-    {key:3, text:'meet more pets', href:'/rescue'}
+    {key:1, text:'Donate', href:'/donate'},
+    {key:2, text:'meet more pets', href:'/rescue'}
 ]
 const BottomPageNavigator:React.FC<props> = ({animal}) => {
     // const [species, setSpecies] = useState({animal})
@@ -62,10 +61,10 @@ const BottomPageNavigator:React.FC<props> = ({animal}) => {
               backgroundImage: `url('${display.bg}')`,
             }}
           >
-            <blockquote className="w-4/5 font-light text-center text-gray-100 lg:text-7xl">
+            <blockquote className="w-4/5 font-light text-center text-[1rem] text-gray-100 lg:text-5xl">
               {`${display.quote}`}
             </blockquote>
-            <span className="text-3xl text-center text-white mt-9 mt-font-light">
+            <span className="text-3xl text-center text-white mt-9 font-light">
               {`${display.by}`}
             </span>
             <ul className='flex flex-col-reverse items-center justify-around lg:flex-row'>

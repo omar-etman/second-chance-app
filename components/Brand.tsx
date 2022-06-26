@@ -13,7 +13,7 @@ const Brand: React.FC = () => {
           height={40}
         />
       </div>
-      <span className='ml-2 text-gray-100 text-1xl'>SECOND CHANCE</span>
+      <span className='ml-2 text-gray-200 transition-all duration-300 text-1xl hover:text-white'>SECOND CHANCE</span>
     </div>     
   )
 }

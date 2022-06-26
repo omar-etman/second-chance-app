@@ -8,12 +8,22 @@ import NavBar from "./NavBar";
 import NavAuthButtons from "./NavAuthButtons";
 import { useUser } from '@supabase/supabase-auth-helpers/react';
 import NavUserButton from "./NavUserButton";
-
+import React from "react";
+// import { controlledRender } from "utils/controlledRendering";
 const Header: React.FC = () => {
 
-  const { user } = useUser();
+  const { user } = useUser();  
+  const authHandling = () => {
+    if(!user){
+      return <NavAuthButtons/>
+    }else{
+      return <NavUserButton/>
+    }
+  }
 
   console.log(user)
+
+  
   
   return (
     <Popover className="w-full ">
@@ -36,12 +46,8 @@ const Header: React.FC = () => {
             </Popover.Button>
           </div>
           <NavBar/>
-          {
-            user
-            ?<NavUserButton/>
-            :<NavAuthButtons/>
-          }
-          
+          {authHandling()}
+          {/* {controlledRender(<NavUserButton/>,<NavAuthButtons/>,user)} */}
         </div>
       </div>
       <MobileDropDown 

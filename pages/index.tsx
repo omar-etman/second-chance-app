@@ -13,18 +13,12 @@ import FadeInTrans3 from "components/transitions/FadeInTrans3";
 // type props = {};
 
 const Home: React.FC = () => {
-  //   const [fadeIn , setFadeIn] = useState(false)
-
-  //   useEffect(() => {
-  //     setFadeIn(true)
-  //   });
-  // }
 
   return (
     <Layout>
       {/* section one */}
       <div
-        className="flex flex-col items-center justify-end w-full min-h-[55rem] md:min-h-screen m-0 bg-fixed bg-center bg-no-repeat bg-cover lg:pb-[6.5rem] "
+        className="flex flex-col items-center justify-end w-full min-h-[55rem] md:min-h-screen m-0 bg-fixed bg-center bg-no-repeat bg-cover"
         style={{ backgroundImage: `url('/assets/images/background-1.jpg')` }}
       >
         <FadeInTrans1>
@@ -38,16 +32,16 @@ const Home: React.FC = () => {
             />
           </div>
         </FadeInTrans1>
-          <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] mt-1 text-white">
+          <div className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] mt-1 text-white">
         <FadeInTrans2>
-            SECOND CHANCE
+           <h1 className='border-b'>SECOND CHANCE</h1>
         </FadeInTrans2>
-          </h1>
-          <span className="text-[1.5rem] font-light text-white mt-0 mb-[9.5rem] leading-0 lg:mb-[5.5rem]">
+          </div>
+          <div className="text-[1.5rem] font-light text-white mt-0 mb-[9.5rem] leading-0 lg:mb-[5.5rem]">
         <FadeInTrans3>
-            we rescue them ... they save us.
+            <span>we rescue them ... they save us.</span>
         </FadeInTrans3>
-          </span>  
+          </div>  
       </div>
       {/* {intro section} */}
       <div className="min-h-[30rem] bg-[#00939C] py-9 w-full flex flex-col justify-center items-center">
@@ -99,7 +93,7 @@ const Home: React.FC = () => {
         <blockquote className="w-4/5 font-light text-center text-gray-100 text-[3rem] lg:text-9xl">
           {`“Sometimes, your pet picks you.”`}
         </blockquote>
-        <span className="text-2xl text-center text-white lg:text-3xl mt-9 mt-font-light">
+        <span className="text-2xl text-center text-white lg:text-3xl mt-9 font-light">
           – Julie Wenzel.
         </span>
           <button className="p-6 transition-all bg-[#00939C] rounded-2xl duration:400 hover:bg-[#9C3E00] flex justify-center items-center my-8 max-w-[15rem] lg:max-w-[25rem]">

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,81 +8,67 @@ datasource db {
 }
 
 model User {
-  id               String      @id     
-  firstName        String?
-  lastName         String?
-  email            String       @unique
-  address          String?
-  country          String?
-  image            String?
-  city             String?
-  phone            String?    
-  donations        Donation[]
-  rescues          Rescue[]
-  // adoptionRequests AdoptionRequest[]
+  firstName String?
+  lastName  String?
+  email     String     @unique
+  password  String?    
+  address   String?
+  country   String?
+  image     String?
+  city      String?
+  phone     String?
+  id        String     @id
+  donations Donation[]
+  rescues   Rescue[]
 }
 
 model Species {
-  id            Int           @id @default(autoincrement())
-  name          String
-  animals       Animal[]
+  name    String
+  id      Int      @id @default(autoincrement())
+  animals Animal[]
 }
 
 model Animal {
-  id            Int           @id @default(autoincrement())
-  name          String?
-  breed         String?
-  dateOfBirth   DateTime?     //change to milliseconds on fend - date.n()
-  story         String?
-  traits        String?
-  requirements  String?
-  gender        Gender?
-  images        Image[]
-  speciesId     Int
-  species       Species       @relation(fields: [speciesId], references: [id])
-  rescue        Rescue[]
-  // adoptionRequests AdoptionRequest[]
-  // the rescue data handling needs revisiting
+  name         String?
+  breed        String?
+  story        String
+  traits       String
+  requirements String
+  gender       Gender?
+  id           Int       @id @default(autoincrement())
+  speciesId    Int
+  dateOfBirth  DateTime?
+  species      Species   @relation(fields: [speciesId], references: [id])
+  images       Image[]
+  Rescue       Rescue[]
 }
 
 model Image {
-  id            Int           @id @default(autoincrement())
-  image         String?
-  animalId      Int
-  animal        Animal        @relation(fields: [animalId], references:[id])
+  image    String?
+  id       Int     @id @default(autoincrement())
+  animalId Int
+  animal   Animal  @relation(fields: [animalId], references: [id])
 }
 
-//suggestion 
-
-// model AdoptionRequest {
-//   id            Int           @id @default(autoincrement())
-//   animalId      Int
-//   userId        String
-//   rescueDate    DateTime      @default(now())
-//   user          User          @relation(fields: [userId], references:[id])
-//   animal        Animal?       @relation(fields: [animalId], references:[id])
-// }
-
 model Rescue {
-  id            Int           @id @default(autoincrement())
-  animalId      Int?
-  userId        String
-  rescueDate    DateTime      @default(now())
-  user          User          @relation(fields: [userId], references:[id])
-  animal        Animal?      @relation(fields: [animalId], references:[id])
+  id         Int      @id @default(autoincrement())
+  animalId   Int
+  userId     String
+  rescueDate DateTime @default(now())
+  Animal     Animal   @relation(fields: [animalId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model Donation {
-  id            Int           @id @default(autoincrement())
-  amount        Int
-  appCredit     Int
-  donationDate  DateTime      @default(now())
-  userId        String
-  user          User          @relation(fields: [userId], references:[id])
+  amount       Int
+  appCredit    Int
+  donationDate DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 enum Gender {
   male
   female
 }
-

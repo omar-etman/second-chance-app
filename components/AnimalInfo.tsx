@@ -7,14 +7,19 @@ import ImageSelector from "./ImageSelector";
 import Loader from "./Loader";
 import { dateFormat, ageDisplay, getMonthDifference } from "utils/dateFormats";
 import { date } from "yup";
-import { Animal } from "@prisma/client";
+import {Animal, Image as AnimPic} from "@prisma/client";
 import AnimalDetails from "./AnimalDetails";
 import { useState } from "react";
 import AnimalRescueDialog from "./AnimalRescueDialog";
 
-type props = {};
+type props = {
+  animal:Animal & {
+    images: AnimPic[];
+} | null;
+  openDialog: () => void
+};
 
-const AnimalInfo: React.FC<AnimalData> = ({ animal }) => {
+const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
   // const age = (animal: { dateOfBirth: Date | number | null }) => {
   //   if(!animal) {
   //     console.log('date error')
@@ -25,10 +30,7 @@ const AnimalInfo: React.FC<AnimalData> = ({ animal }) => {
   //   const date2 = today
   //   return getMonthDifference(date1, date2)
   // }
-  const [open, setOpen] = useState(false);
-  const openDialog = () => {
-    setOpen(true);
-  };
+
   const traits = animal!.traits!;
   const requirements = animal!.requirements!;
 
@@ -63,7 +65,6 @@ const AnimalInfo: React.FC<AnimalData> = ({ animal }) => {
 
   return (
     <>
-      <AnimalRescueDialog open={open} setOpen={setOpen} />
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           <ImageSelector images={animal!.images} name={animal?.name} />

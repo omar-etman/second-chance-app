@@ -3,11 +3,22 @@ import React, { Fragment, ReactElement } from "react";
 import Image from "next/image";
 import {classNames} from '../utils/classNames'
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { createClient } from '@supabase/supabase-js'
+import { useRouter } from "next/router";
 
 const NavUserButton: React.FC = () => {
 
   const { user } = useUser();
   const dummyAvatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+  const router = useRouter();
+  const signoutWithGoogle = async () => {
+    const { error } = await supabase.auth.signOut();
+    // return error
+    // router.push("/");
+}
+  
+  
   return (
     <Menu as="div" className="relative hidden ml-3 lg:block">
       <div>
@@ -52,21 +63,22 @@ const NavUserButton: React.FC = () => {
           </Menu.Item>
           <Menu.Item>
             {({ active }: { active: Boolean }): ReactElement => (
-              <a
-                href="#"
+              <div
+                // href="#"
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
               >
                 Settings
-              </a>
+              </div>
             )}
           </Menu.Item>
           <Menu.Item>
             {({ active }: { active: Boolean }): ReactElement => (
               <a
                 href="#"
+                onClick={() => signoutWithGoogle()}
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"

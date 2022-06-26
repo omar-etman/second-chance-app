@@ -33,11 +33,11 @@ const AnimalsFilter: React.FC<props> = ({filterBy, setFilterBy}) => {
         });
 
   return (
-    <Combobox as="div" value={sp} onChange={setSelectedSp}>
-      <Combobox.Label className="block text-sm font-medium text-gray-700">Assigned to</Combobox.Label>
+    <Combobox as="div" value={sp} onChange={setSelectedSp} className='w-[60%]'>
+      <Combobox.Label className="block text-sm font-medium text-gray-100">Looking for :</Combobox.Label>
       <div className="relative mt-1">
         <Combobox.Input
-          className="w-full py-2 pl-3 pr-10 bg-white border border-gray-300 rounded-md shadow-sm focus:border-orange-700 focus:outline-none focus:ring-1 focus:ring-orange-900 sm:text-sm"
+          className="w-full py-2 pl-3 pr-10 bg-white border border-gray-300 rounded-md shadow-sm focus:border-orange-700 focus:outline-none focus:ring-1 focus:ring-[#9C3E00] sm:text-sm"
           onChange={(event) => setQuery(event.target.value)}
           displayValue={(sp: { name: string; }) => sp?.name}
         />

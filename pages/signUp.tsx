@@ -6,29 +6,79 @@ import { useRouter } from 'next/router';
 import { User } from '@prisma/client';
 import { authFullUser } from 'slices/auth.slice';
 import { useAppDispatch, useAppSelector } from 'store/hook';
+import { createClient } from '@supabase/supabase-js';
+import useSWR from 'swr';
+import { useUser } from '@supabase/supabase-auth-helpers/react';
+import { useCallback, useEffect } from 'react';
 
-
+// const dbFetcher = (url:string) => axios.get(url).then((res) => res.data)
 const Signup: React.FC = () => {
+
+  type FormValues = {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    country: string; 
+    city: string; 
+    phone: string;
+  }
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const existingUser = useAppSelector(authFullUser)
+  const { user } = useUser();
+  // const dispatch = useAppDispatch();
+  // const {data:dbUser, error} = useSWR(`/api/user/${user?.id}`, dbFetcher )
+  // const existingUser = useAppSelector(authFullUser)
+  
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL! || " ",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! || " "
+  );
+  
+  const signUpHandler = async(values: FormValues) => {
+    const { user, session, error } = await supabase.auth.signUp(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          country: values.country,
+          city: values.city,
+          phone:values.phone    
+        },
+      }
+    );
+    if(user){
+      // console.log(user);
+      const res = await axios.post('/api/user', user); 
+      // console.log('userCreated?', res);
+      router.push("/");
+    }
+  }
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
+      email: '',
+      password:'',
       address: '',
       country: '',
       city:'',
       phone:''
     },
-    onSubmit: async (values: any, resetForm: any) => {
+    onSubmit: async (values: FormValues, resetForm: any) => {
       console.log(values);
-      const res = await axios.post('/api/user', values);
-      const data :User = res.data.newUser
-      console.log('res', res)
-      console.log('data', data);
-      dispatch(authFullUser(data));
-      router.push('/home');
+      // const res = await axios.post('/api/user', values);
+      // const data :User = res.data.newUser
+      // console.log('res', res)
+      // console.log('data', data);
+      signUpHandler(values)
+      // dispatch(authFullUser(data));
+      router.push('/');
       resetForm();
     },
     validationSchema: Yup.object({
@@ -40,15 +90,34 @@ const Signup: React.FC = () => {
       phone: Yup.string().required('this input is required')
     })
   });
-  console.log(authFullUser)
+  // console.log(authFullUser)
   const formMapper = [
     {key:1, name:'firstName',formValue:formik.values.firstName, label:`First name`, type:'string', placeholder:`i.e John`},
     {key:2, name:'lastName',formValue:formik.values.lastName, label:`Last name`, type:'string', placeholder:`i.e Doe`},
-    {key:3, name:'address',formValue:formik.values.address, label:`Address`, type:'string', placeholder:`building/appartment , street name, area`},
-    {key:4, name:'city',formValue:formik.values.city, label:`City`, type:'string', placeholder:`City`},
-    {key:5, name:'country',formValue:formik.values.country, label:`Country`, type:'string', placeholder:`Country`},
-    {key:6, name:'phone',formValue:formik.values.phone, label:`Phone number`, type:'string', placeholder:`+20 1xxxxxxxxx`},
+    {key:3, name:'email',formValue:formik.values.email, label:`Email`, type:'string', placeholder:`johndoe@example.come`},
+    {key:4, name:'password',formValue:formik.values.password, label:`Password`, type:'password', placeholder:`xxxxxxxxxxxxxxxxxxx`},
+    {key:5, name:'address',formValue:formik.values.address, label:`Address`, type:'string', placeholder:`building/appartment , street name, area`},
+    {key:6, name:'city',formValue:formik.values.city, label:`City`, type:'string', placeholder:`City`},
+    {key:7, name:'country',formValue:formik.values.country, label:`Country`, type:'string', placeholder:`Country`},
+    {key:8, name:'phone',formValue:formik.values.phone, label:`Phone number`, type:'string', placeholder:`+20 1xxxxxxxxx`},
   ]
+
+  // const dbValidator = useCallback( async () => {
+  //   if (!dbUser || dbUser === null || undefined) {
+  //     return
+  //   } else  {
+  //     router.push('/'); 
+  //   } 
+
+  // }, [dbUser, router])
+
+  const googleSignUp = () => {
+    
+  }
+
+  // useEffect(() => {
+  //   dbValidator();
+  // }, [dbValidator]);
 
 
   return (

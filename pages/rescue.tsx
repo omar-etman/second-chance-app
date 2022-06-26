@@ -12,7 +12,7 @@ const Rescue: React.FC = () => {
   const user = useUser();
 
   const noUserRender = () => {
-    if (!user) {
+    if (user) {
       return null;
     } else {
       return (
@@ -72,13 +72,13 @@ const Rescue: React.FC = () => {
             backgroundImage: `url('/assets/images/rescue-background-2.jpg')`,
           }}
         >
-          <blockquote className="w-4/5 font-light text-center text-gray-100 lg:text-6xl">
-            {`"Love the animals: God has given them the rudiments of thought and joy untroubled."`}
+          <blockquote className="w-4/5 font-light text-center text-gray-100 text-[2rem] lg:text-6xl">
+            {`"Love the animals, God has given them the rudiments of thought and joy untroubled."`}
           </blockquote>
           <span className="text-3xl text-center text-white mt-9 mt-font-light">
             - Fyodor Dostoevsky.
           </span>
-          <button className="p-9 transition-all bg-[#9C3E00] rounded-2xl duration:400 hover:bg-[#00939C] flex justify-center items-center my-8">
+          <button className="p-6 transition-all bg-[#9C3E00] rounded-2xl duration:400 hover:bg-[#00939C] flex justify-center items-center my-8 max-w-[15rem] lg:max-w-[25rem]">
             <Link href="/help">
               <a className="text-2xl text-gray-100">Wanna ask something ?</a>
             </Link>

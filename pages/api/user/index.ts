@@ -23,23 +23,24 @@ async function createUser(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const { user } = await getUser({ req, res });
-    const { firstName, lastName, address, country, city, phone } = req.body;
+    const { firstName, lastName, address, country, email, city, phone, password } = req.body;
     console.log(req.body);
     console.log(user);
 
-    const existingUser = await prisma.user.findUnique({
-      where: { id: user?.id }});
+    // const existingUser = await prisma.user.findUnique({
+    //   where: { id: user?.id }});
 
-    if(existingUser){
-      return existingUser
-    }
+    // if(existingUser){
+    //   return existingUser
+    // }
     
     const data = user?.user_metadata;
     const newUser = await prisma.user.create({
       data: {
         id: user?.id!,
-        email: user?.email!,
+        email,
         //revisit that
+        password,
         image: data?.avatar_url,
         firstName,
         lastName,

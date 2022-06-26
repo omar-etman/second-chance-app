@@ -47,7 +47,7 @@ const AnimalsList: React.FC = () => {
   }
   return (
     <div className="w-full pb-8 bg-gray-100">
-      <div className="flex items-center justify-center w-3/5">
+      <div className="flex items-center justify-center w-full bg-[#9C3E00] pt-2 pb-4">
         <AnimalsFilter 
           filterBy={filterBy}
           setFilterBy={setFilterBy}
