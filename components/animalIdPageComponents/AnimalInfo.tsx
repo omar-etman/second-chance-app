@@ -4,7 +4,7 @@ import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
 import { classNames } from "utils/classNames";
 import { AnimalData } from "types";
 import ImageSelector from "./ImageSelector";
-import Loader from "./Loader";
+import Loader from "../Loader";
 import { dateFormat, ageDisplay, getMonthDifference } from "utils/dateFormats";
 import { date } from "yup";
 import {Animal, Image as AnimPic} from "@prisma/client";

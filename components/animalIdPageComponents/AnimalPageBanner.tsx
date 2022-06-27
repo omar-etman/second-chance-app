@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimalData } from 'types'
-import FadeInTrans2 from './transitions/FadeInTrans2'
+import FadeInTrans2 from '../transitionComponents/FadeInTrans2'
 
 const AnimalPageBanner:React.FC<AnimalData> = ({animal}) => {
   return (

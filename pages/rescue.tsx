@@ -1,20 +1,27 @@
-import AnimalsList from "components/AnimalsList";
+import AnimalsList from "components/rescuePageComponents/AnimalsList";
 import Layout from "components/Layout";
 import React from "react";
 import Link from "next/link";
-import FadeInTrans2 from "components/transitions/FadeInTrans2";
-import FadeInTrans1 from "components/transitions/FadeInTrans1";
-import FadeInTrans3 from "components/transitions/FadeInTrans3";
+import FadeInTrans2 from "components/transitionComponents/FadeInTrans2";
+import FadeInTrans1 from "components/transitionComponents/FadeInTrans1";
+import FadeInTrans3 from "components/transitionComponents/FadeInTrans3";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
+import SingleRouteBottomBanner from "components/homePageComponents/HomePageBottomBanner";
+
+const quote = `“Love the animals, God has given them the rudiments of thought and joy untroubled.”`
+const author = `-Fyodor Dostoevsky.`
+const buttonSpan = `Wanna ask something ?`
+const nextRoute = '/help'
+const BannerBg = '/assets/images/rescue-background-2.jpg'
 
 const Rescue: React.FC = () => {
   const user = useUser();
 
   const noUserRender = () => {
-    if (user) {
+    if (!user) {
       return null;
-    } else {
+    } else if (user) {
       return (
         <p className="w-4/5 text-2xl font-light text-center text-white mt-9">
           <FadeInTrans3>
@@ -69,14 +76,14 @@ const Rescue: React.FC = () => {
         <div
           className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] md:h-[50rem] lg:h-[40rem] p-0"
           style={{
-            backgroundImage: `url('/assets/images/rescue-background-2.jpg')`,
+            backgroundImage: `url(${BannerBg})`,
           }}
         >
           <blockquote className="w-4/5 font-light text-center text-gray-100 text-[2rem] lg:text-6xl">
-            {`"Love the animals, God has given them the rudiments of thought and joy untroubled."`}
+            {quote}
           </blockquote>
           <span className="text-3xl text-center text-white mt-9 mt-font-light">
-            - Fyodor Dostoevsky.
+            {author}
           </span>
           <button className="p-6 transition-all bg-[#9C3E00] rounded-2xl duration:400 hover:bg-[#00939C] flex justify-center items-center my-8 max-w-[15rem] lg:max-w-[25rem]">
             <Link href="/help">
@@ -84,6 +91,13 @@ const Rescue: React.FC = () => {
             </Link>
           </button>
         </div>
+        {/* <SingleRouteBottomBanner
+          quote={quote}
+          author={author}
+          buttonSpan={buttonSpan}
+          nextRoute={nextRoute}
+          BannerBg={BannerBg}
+        /> */}
       </>
     </Layout>
   );

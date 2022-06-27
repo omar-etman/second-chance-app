@@ -8,9 +8,9 @@ import {authFullUser} from 'slices/auth.slice';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import useSWR from 'swr';
 import axios from 'axios';
-import FadeInTrans3 from 'components/transitions/FadeInTrans3';
-import FadeInTrans2 from 'components/transitions/FadeInTrans2';
-import FadeInTrans1 from 'components/transitions/FadeInTrans1';
+import FadeInTrans3 from 'components/transitionComponents/FadeInTrans3';
+import FadeInTrans2 from 'components/transitionComponents/FadeInTrans2';
+import FadeInTrans1 from 'components/transitionComponents/FadeInTrans1';
 import { useCallback, useEffect } from 'react';
 import EmailSignIn from 'components/EmailSignIn';
 

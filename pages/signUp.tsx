@@ -4,38 +4,20 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { User } from '@prisma/client';
-import { authFullUser } from 'slices/auth.slice';
-import { useAppDispatch, useAppSelector } from 'store/hook';
 import { createClient } from '@supabase/supabase-js';
-import useSWR from 'swr';
 import { useUser } from '@supabase/supabase-auth-helpers/react';
-import { useCallback, useEffect } from 'react';
-
-// const dbFetcher = (url:string) => axios.get(url).then((res) => res.data)
+import { SignUpFormValues } from 'types';
 const Signup: React.FC = () => {
 
-  type FormValues = {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    country: string; 
-    city: string; 
-    phone: string;
-  }
   const router = useRouter();
   const { user } = useUser();
-  // const dispatch = useAppDispatch();
-  // const {data:dbUser, error} = useSWR(`/api/user/${user?.id}`, dbFetcher )
-  // const existingUser = useAppSelector(authFullUser)
   
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL! || " ",
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! || " "
   );
   
-  const signUpHandler = async(values: FormValues) => {
+  const signUpHandler = async(values: SignUpFormValues) => {
     const { user, session, error } = await supabase.auth.signUp(
       {
         email: values.email,
@@ -53,9 +35,7 @@ const Signup: React.FC = () => {
       }
     );
     if(user){
-      // console.log(user);
       const res = await axios.post('/api/user', user); 
-      // console.log('userCreated?', res);
       router.push("/");
     }
   }
@@ -70,20 +50,17 @@ const Signup: React.FC = () => {
       city:'',
       phone:''
     },
-    onSubmit: async (values: FormValues, resetForm: any) => {
+    onSubmit: async (values: SignUpFormValues, resetForm: any) => {
       console.log(values);
-      // const res = await axios.post('/api/user', values);
-      // const data :User = res.data.newUser
-      // console.log('res', res)
-      // console.log('data', data);
       signUpHandler(values)
-      // dispatch(authFullUser(data));
       router.push('/');
       resetForm();
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('this input is required'),
       lastName: Yup.string().required('this input is required'),
+      email:Yup.string().email('Invalid email format').required('this input is required'),
+      password:Yup.string().required('this input is required'),
       address: Yup.string().required('this input is required'),
       country: Yup.string().required('this input is required'),
       city: Yup.string().required('this input is required'),
@@ -101,24 +78,6 @@ const Signup: React.FC = () => {
     {key:7, name:'country',formValue:formik.values.country, label:`Country`, type:'string', placeholder:`Country`},
     {key:8, name:'phone',formValue:formik.values.phone, label:`Phone number`, type:'string', placeholder:`+20 1xxxxxxxxx`},
   ]
-
-  // const dbValidator = useCallback( async () => {
-  //   if (!dbUser || dbUser === null || undefined) {
-  //     return
-  //   } else  {
-  //     router.push('/'); 
-  //   } 
-
-  // }, [dbUser, router])
-
-  const googleSignUp = () => {
-    
-  }
-
-  // useEffect(() => {
-  //   dbValidator();
-  // }, [dbValidator]);
-
 
   return (
     <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -188,6 +147,3 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
-
-
-//className="lg:col-span-2 md:col-span-1 relative h-[100%] hidden md:block bg-fixed bg-center bg-no-repeat bg-cover" style = {{backgroundImage: `url('/assets/images/signup-poster.jpg')`}}

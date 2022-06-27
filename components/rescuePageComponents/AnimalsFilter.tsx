@@ -3,7 +3,7 @@ import { Combobox, RadioGroup } from "@headlessui/react";
 import { classNames } from "utils/classNames";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/outline";
 import Image from "next/image";
-import {species} from '../utils/AnimalFilter'
+import {species} from '../../utils/AnimalFilter'
 import { Sp, SpeciesTabs } from "types";
 
 

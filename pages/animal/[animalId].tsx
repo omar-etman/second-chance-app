@@ -4,12 +4,12 @@ import useSWR from "swr";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Loader from "components/Loader";
-import AnimalDetails from "components/AnimalInfo";
-import AnimalInfo from "components/AnimalInfo";
-import AnimalPageBanner from "components/AnimalPageBanner";
+import AnimalDetails from "components/animalIdPageComponents/AnimalInfo";
+import AnimalInfo from "components/animalIdPageComponents/AnimalInfo";
+import AnimalPageBanner from "components/animalIdPageComponents/AnimalPageBanner";
 import Link from "next/link";
-import BottomPageNavigator from "components/BottomPageNavigator";
-import AnimalRescueDialog from "components/AnimalRescueDialog";
+import BottomPageNavigator from "components/animalIdPageComponents/BottomPageNavigator";
+import AnimalRescueDialog from "components/animalIdPageComponents/AnimalRescueDialog";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 const AnimalPage: React.FC = () => {

@@ -52,7 +52,7 @@ const BottomPageNavigator:React.FC<props> = ({animal}) => {
             default:
               return setDisplay(display);
           }
-      },[]);
+      },[animal, display]);
   
     return (
     <div
@@ -64,7 +64,7 @@ const BottomPageNavigator:React.FC<props> = ({animal}) => {
             <blockquote className="w-4/5 font-light text-center text-[1rem] text-gray-100 lg:text-5xl">
               {`${display.quote}`}
             </blockquote>
-            <span className="text-3xl text-center text-white mt-9 font-light">
+            <span className="text-3xl font-light text-center text-white mt-9">
               {`${display.by}`}
             </span>
             <ul className='flex flex-col-reverse items-center justify-around lg:flex-row'>

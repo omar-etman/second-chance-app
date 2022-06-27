@@ -86,3 +86,49 @@ export type Picture = {
     images:AnimPic[]
 }
 
+//----------------------------
+//forms-----------------------
+
+export type SignUpFormValues = {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    country: string; 
+    city: string; 
+    phone: string;
+}
+
+export type AdoptionRequestFormValues = {
+    petName: string;
+    breed: string;
+    story: string;
+    traits: string;
+    requirements: string;
+    gender: string; 
+    species: string;
+    dateOfBirth: string; 
+    images: AnimPic[];
+}
+
+export type Option = {
+    key:number
+    value:string
+}
+
+export type FormControlProps = {
+  control:string
+  type:string
+  label:string
+  name:string
+  options?:Option[]
+}
+
+export type FormFieldProps = {
+    type:string
+    label:string
+    name:string
+    options?:Option[]
+}
+
