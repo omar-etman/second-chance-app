@@ -1,16 +1,9 @@
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/solid";
-import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
-import { classNames } from "utils/classNames";
-import { AnimalData } from "types";
 import ImageSelector from "./ImageSelector";
 import Loader from "../Loader";
-import { dateFormat, ageDisplay, getMonthDifference } from "utils/dateFormats";
-import { date } from "yup";
+import { dateFormat } from "utils/dateFormats";
 import {Animal, Image as AnimPic} from "@prisma/client";
 import AnimalDetails from "./AnimalDetails";
-import { useState } from "react";
-import AnimalRescueDialog from "./AnimalRescueDialog";
+// import moment from "moment";
 
 type props = {
   animal:Animal & {
@@ -19,18 +12,39 @@ type props = {
   openDialog: () => void
 };
 
-const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
-  // const age = (animal: { dateOfBirth: Date | number | null }) => {
-  //   if(!animal) {
-  //     console.log('date error')
-  //     return
-  //   }
-  //   const today = dateFormat(Date.now(), 'MM-dd-yyyy')
-  //   const date1 = dateFormat(animal!.dateOfBirth!, 'MM-dd-yyyy')
-  //   const date2 = today
-  //   return getMonthDifference(date1, date2)
-  // }
 
+
+const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
+
+  // const birthDate = moment(animal?.dateOfBirth).utc().format('MM-dd-yyyy')
+  // const todaysDate = moment(Date.now()).utc().format('MM-dd-yyyy')
+  const birthDate = dateFormat(animal!.dateOfBirth!, 'mm-dd-yyyy')
+  const todaysDate = dateFormat(Date.now(), 'mm-dd-yyyy')
+
+  const ageDisplay = () => {
+    const currentDate = +new Date(`${todaysDate}`)
+    const previousDate = +new Date(`${birthDate}`)
+    const milliSecondsDiff = currentDate - previousDate
+    const daysDiff =  Math.round(milliSecondsDiff / 86400000)
+    const monthsDiff = Math.round(milliSecondsDiff  / 2629746000)
+    const yearsDiff = monthsDiff / 12
+    if(monthsDiff < 1){
+      return `${daysDiff} days`
+    } else if (monthsDiff === 1) {
+      return `${monthsDiff} month`
+    } else if (monthsDiff === 12) {
+      return `${yearsDiff} year`
+    } else if (monthsDiff > 12) {
+      return  `${yearsDiff} years & ${monthsDiff - 12} months`
+    } else if (monthsDiff > 12 && yearsDiff === 1){
+      return `${yearsDiff} year & ${monthsDiff - 12} months`
+    } else { 
+      return `${monthsDiff} months`
+    }
+  }
+
+  console.log(todaysDate);
+  console.log(birthDate);
   const traits = animal!.traits!;
   const requirements = animal!.requirements!;
 
@@ -77,6 +91,7 @@ const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
             <div className="mt-3">
               <h2 className="sr-only">{`animal's`} breed</h2>
               <p className="text-3xl text-gray-100">{animal.breed}</p>
+              <p className="text-2xl font-light text-gray-100">{ageDisplay()}</p>
             </div>
 
             <div className="mt-6">
