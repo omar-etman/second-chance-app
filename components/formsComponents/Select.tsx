@@ -3,7 +3,7 @@ import { Field, ErrorMessage, FieldProps } from 'formik'
 import TextError from './TextError'
 import { FormFieldProps, Option } from 'types'
 
-const Select:React.FC<FormFieldProps> = ({ label, name, ...rest }) => {
+const Select:React.FC<FormFieldProps> = ({ label, name, options, ...rest }) => {
   return (
     <div className=''>
       <label htmlFor={name}>{label}</label>

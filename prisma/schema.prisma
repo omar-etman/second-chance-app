@@ -10,8 +10,7 @@ datasource db {
 model User {
   firstName String?
   lastName  String?
-  email     String     @unique
-  password  String?    
+  email     String     @unique   
   address   String?
   country   String?
   image     String?

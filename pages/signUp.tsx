@@ -17,7 +17,7 @@ const Signup: React.FC = () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! || " "
   );
   
-  const signUpHandler = async(values: SignUpFormValues) => {
+  const signUpHandler = async (values: SignUpFormValues) => {
     const { user, session, error } = await supabase.auth.signUp(
       {
         email: values.email,
@@ -30,15 +30,16 @@ const Signup: React.FC = () => {
           address: values.address,
           country: values.country,
           city: values.city,
-          phone:values.phone    
+          phone: values.phone,
         },
       }
     );
-    if(user){
-      const res = await axios.post('/api/user', user); 
+    if (user) {
+      const res = await axios.post("/api/user", user);
+      console.log(user);
       router.push("/");
     }
-  }
+  };
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -68,7 +69,7 @@ const Signup: React.FC = () => {
     })
   });
   // console.log(authFullUser)
-  const formMapper = [
+  const SignUpFormFeilds = [
     {key:1, name:'firstName',formValue:formik.values.firstName, label:`First name`, type:'string', placeholder:`i.e John`},
     {key:2, name:'lastName',formValue:formik.values.lastName, label:`Last name`, type:'string', placeholder:`i.e Doe`},
     {key:3, name:'email',formValue:formik.values.email, label:`Email`, type:'string', placeholder:`johndoe@example.come`},
@@ -78,6 +79,30 @@ const Signup: React.FC = () => {
     {key:7, name:'country',formValue:formik.values.country, label:`Country`, type:'string', placeholder:`Country`},
     {key:8, name:'phone',formValue:formik.values.phone, label:`Phone number`, type:'string', placeholder:`+20 1xxxxxxxxx`},
   ]
+
+  const signUpFormMapper = () => {
+    return (
+      SignUpFormFeilds.map((f) => (
+        <div className="mb-6" key={f.key}>
+          <label className="block mb-2 text-sm font-medium text-gray-100 ">
+            {f.label}
+          </label>
+              <input
+              type={f.type}
+              id={f.name}
+              name={f.name}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder={f.placeholder}
+              onBlur={formik.handleBlur}
+              value={f.formValue}
+              onChange={formik.handleChange}
+              required
+              />
+        </div>
+        
+      ))
+    )
+  }
 
   return (
     <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -97,28 +122,7 @@ const Signup: React.FC = () => {
           </div>
           <div className="mb-3">
             <form>
-              {
-                formMapper.map((f) => (
-                  <div className="mb-6" key={f.key}>
-                    <label className="block mb-2 text-sm font-medium text-gray-100 ">
-                      {f.label}
-                    </label>
-                        <input
-                        type={f.type}
-                        id={f.name}
-                        name={f.name}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder={f.placeholder}
-                        onBlur={formik.handleBlur}
-                        value={f.formValue}
-                        onChange={formik.handleChange}
-                        required
-                        />
-                  </div>
-                  
-                ))
-              }
-
+              {signUpFormMapper()}
               <button
                 type="submit"
                 className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-700 self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00] "
@@ -137,7 +141,7 @@ const Signup: React.FC = () => {
       <div className="lg:col-span-2 md:col-span-1 relative h-[100%] hidden md:block">
         <Image
           src="/assets/images/signup-poster.jpg"
-          alt="Picture of the author"
+          alt="sign up poster"
           layout="fill"
           objectFit="cover"
         />

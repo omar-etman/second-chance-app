@@ -22,39 +22,31 @@ export default async function handle(
 async function createUser(req: NextApiRequest, res: NextApiResponse) {
 
   try {
-    const { user } = await getUser({ req, res });
-    const { firstName, lastName, address, country, email, city, phone, password } = req.body;
-    console.log(req.body);
-    console.log(user);
-
-    // const existingUser = await prisma.user.findUnique({
-    //   where: { id: user?.id }});
-
-    // if(existingUser){
-    //   return existingUser
-    // }
+    const { id, email, user_metadata } = req.body;
     
-    const data = user?.user_metadata;
-    const newUser = await prisma.user.create({
-      data: {
-        id: user?.id!,
-        email,
-        //revisit that
-        password,
-        image: data?.avatar_url,
-        firstName,
-        lastName,
-        address,
-        country,
-        city,
-        phone
-      },
-    });
-
-    res.status(200).json({ msg: "user info created", newUser });
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({ msg: "something went wrong", details: err });
+    console.log(user_metadata)
+    if (!id) {
+      res.status(500).json({ msg: "bad signup" });
+    } else {
+      const newUser: User = await prisma.user.create({
+        data: {
+          id: id,
+          firstName: user_metadata.firstName,
+          lastName: user_metadata.lastName,
+          address: user_metadata.address,
+          city:user_metadata.city,
+          country:user_metadata.country,
+          phone:user_metadata.phone,
+          email,
+          image: "",
+          
+       
+        },
+      });
+      res.status(200).json({ msg: "user created", user: newUser });
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 

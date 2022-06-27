@@ -1,13 +1,12 @@
 import React from 'react'
-import { useUser } from '@supabase/supabase-auth-helpers/react';
 import * as Yup from 'yup';
-import { AdoptionRequestFormValues } from 'types';
+import { AdoptionRequestFormValues, FormControlProps, Option } from 'types';
 import { Formik, Form, Field } from 'formik'
+import { formFields } from 'utils/adoptionFormArray';
+import FormControl from 'components/formsComponents/FormControl';
 
 const AdoptionForm:React.FC = () => {
-
-  const { user } = useUser();
-
+  
   const initialValues =  {
     petName: '',
     breed: '',
@@ -39,6 +38,22 @@ const AdoptionForm:React.FC = () => {
     resetForm();
   }
 
+  const formFieldMapper = () => {
+    return (
+      formFields.map((fld) => (
+        <FormControl
+          key={fld.key}
+          control={fld.control}
+          type={fld.type}
+          label={fld.label}
+          name={fld.name}
+          placeholder={fld.placeholder}
+          options={fld.options}
+        />
+      ))
+    )
+  }
+
   return (
     <Formik
       initialValues={initialValues}
@@ -46,9 +61,7 @@ const AdoptionForm:React.FC = () => {
       onSubmit={onSubmit}
     >
       <Form>
-        <Field>
-          
-        </Field>
+        {formFieldMapper()}
       </Form>
     </Formik>
   )

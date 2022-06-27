@@ -11,9 +11,6 @@ type props = {
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-// const rescueConfirmedAPICall = (url: string) =>
-//   axios.post(url).then((res) => res.data);
-
 const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);
   const router = useRouter();
@@ -21,25 +18,11 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
   const userId = user.user?.id;
   const animalId = router.query.animalId;
 
-  // const { data: rescued, error } = useSWR(
-  //   `/api/rescue/${animalId}`,
-  //   rescueConfirmedAPICall
-  // );
-
-  // useEffect(() => {
-  //   if(userId){
-  //     return rescued
-  //   }
-  //   console.log(userId)
-  // },[])
-
-
   const rescue = async () => {
     setOpen(false)
-    const res = axios.post(`/api/rescue/${animalId}/${userId}`);
+    const res = axios.post(`/api/rescue`, {animalId, userId});
     const data = await res;
     console.log('data', data);
-    // router.push('/');
   }
 
   const routeToLogin = () => {
@@ -50,7 +33,6 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
   const exitDialog = () => {
     setOpen(false);
     console.log(user)
-    // console.log(userId);
     console.log(animalId);
   };
 
@@ -109,7 +91,6 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
             >
               <Dialog.Panel className="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6">
                 <div>
-                  {/* <div className="flex items-center justify-center h-17 w-17"> */}
                   <div className="relative flex items-center self-center justify-center w-full">
                     <Image
                       src="/assets/images/logo.png"
@@ -119,7 +100,6 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
                       objectFit="contain"
                     />
                   </div>
-                  {/* </div> */}
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title
                       as="h3"
@@ -139,13 +119,6 @@ const AnimalRescueDialog: React.FC<props> = ({ open, setOpen }) => {
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
-                  {/* <button
-                    type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-[#10ABB4] border border-transparent rounded-md shadow-sm hover:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-700 sm:col-start-2 sm:text-sm"
-                    onClick={rescue}
-                  >
-                    Yes
-                  </button> */}
                   {userCheck()}
                   <button
                     type="button"

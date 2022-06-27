@@ -1,4 +1,5 @@
 import { Animal, Gender, Image as AnimPic } from '@prisma/client';
+import { DateTime } from 'luxon';
 import { SVGProps } from "react";
 
 //header nav arrays
@@ -108,20 +109,22 @@ export type AdoptionRequestFormValues = {
     requirements: string;
     gender: string; 
     species: string;
-    dateOfBirth: string; 
+    dateOfBirth: Date | any; 
     images: AnimPic[];
 }
 
 export type Option = {
-    key:number
+    key:string
     value:string
 }
 
 export type FormControlProps = {
+  key:number
   control:string
   type:string
   label:string
   name:string
+  placeholder?:string
   options?:Option[]
 }
 
@@ -129,6 +132,7 @@ export type FormFieldProps = {
     type:string
     label:string
     name:string
+    placeholder?:string
     options?:Option[]
 }
 

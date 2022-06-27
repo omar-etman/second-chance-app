@@ -25,7 +25,7 @@ const NavUserButton: React.FC = () => {
         <Menu.Button className="flex px-3 text-sm rounded-full focus:outline-none focus:ring-0 focus:ring-offset-0">
           <span className="sr-only">Open user menu</span>
           <div className="flex flex-row items-center justify-center">
-            <span className='mr-3 font-light text-gray-200 text-[1.2rem] transition-all duration-300 hover:text-white'>{user?.user_metadata.name}</span>
+            <span className='mr-3 font-light text-gray-200 text-[1.2rem] transition-all duration-300 hover:text-white'>{`${user?.user_metadata.firstName} ${user?.user_metadata.lastName}`}</span>
             <div className="relative transition-all rounded-full h-9 w-9">
               <Image
                 src={user?.user_metadata.avatar_url || dummyAvatar}
