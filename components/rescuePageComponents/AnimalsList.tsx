@@ -3,8 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 import AnimalCard from "./AnimalCard";
 import AnimalsFilter from "./AnimalsFilter";
-import { Animal, Image as AnimPic } from "@prisma/client";
-import {species} from '../../utils/AnimalFilter'
+import { Animal, Rescue, Image as AnimPic } from "@prisma/client";
 import Loader from "../Loader";
 
 
@@ -14,12 +13,9 @@ const AnimalsList: React.FC = () => {
   const { data, error } = useSWR(`/api/animals`, fetcher);
   const [filterBy, setFilterBy] = useState("all");
 
- 
-
   const filtering = () => {
-    const filteredData = data.filter((f: { species: { name: string; }; }) => f.species.name === filterBy)
-    const unrescuedAnimals = data.filter((f) => f.Rescue.length === 0)
-    console.log(filteredData)
+    const filteredAnimals = data.filter((f: { species: { name: string; }; }) => f.species.name === filterBy)
+    const unrescuedAnimals = data.filter((f: { Rescue: Rescue[] }) => f.Rescue.length === 0)
     if (filterBy === "all") {
       return (
         <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
@@ -33,7 +29,7 @@ const AnimalsList: React.FC = () => {
     } else {
         return (
           <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-          {filteredData.map((animal: (Animal & { images: AnimPic[] }) | null) => (
+          {filteredAnimals.map((animal: (Animal & { images: AnimPic[] }) | null) => (
             <li key={animal?.id}>
               <AnimalCard animal={animal} />
             </li>

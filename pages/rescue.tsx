@@ -19,9 +19,9 @@ const Rescue: React.FC = () => {
   const user = useUser();
 
   const noUserRender = () => {
-    if (!user) {
+    if (user) {
       return null;
-    } else if (user) {
+    } else if (!user || user === null || undefined) {
       return (
         <p className="w-4/5 text-2xl font-light text-center text-white mt-9">
           <FadeInTrans3>
@@ -68,9 +68,9 @@ const Rescue: React.FC = () => {
           {noUserRender()}
         </div>
         <div className="flex flex-col items-center justify-center pt-8 m-0 bg-[#00939C] w-full min-h-[35rem]">
-          <span className="w-4/5 mb-6 text-4xl font-bold text-center text-gray-100">
-            Meet the current Second Chance household
-          </span>
+          <h1 className="w-4/5 mb-6 text-5xl font-light text-center text-gray-100">
+            Meet the Second Chance household
+          </h1>
           <AnimalsList />
         </div>
         <div
