@@ -18,11 +18,12 @@ const AnimalsList: React.FC = () => {
 
   const filtering = () => {
     const filteredData = data.filter((f: { species: { name: string; }; }) => f.species.name === filterBy)
+    const unrescuedAnimals = data.filter((f) => f.Rescue.length === 0)
     console.log(filteredData)
     if (filterBy === "all") {
       return (
         <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-          {data.map((animal: (Animal & { images: AnimPic[] }) | null) => (
+          {unrescuedAnimals.map((animal: (Animal & { images: AnimPic[] }) | null) => (
             <li key={animal?.id}>
               <AnimalCard animal={animal} />
             </li>
