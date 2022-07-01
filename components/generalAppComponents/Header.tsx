@@ -2,19 +2,19 @@ import { Popover} from "@headlessui/react";
 import {MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Brand from "./Brand";
-import { resources, navRoutes, authRoutes } from "../utils/navTabs/index";
-import MobileDropDown from "./MobileDropDown";
-import NavBar from "./NavBar";
-import NavAuthButtons from "./NavAuthButtons";
+import { resources, navRoutes, authRoutes } from "../../utils/navTabs/index";
+import MobileDropDown from "../headerComponents/MobileDropDown";
+import NavBar from "../headerComponents/NavBar";
+import NavAuthButtons from "../headerComponents/NavAuthButtons";
 import { useUser } from '@supabase/supabase-auth-helpers/react';
-import NavUserButton from "./NavUserButton";
+import NavUserButton from "../headerComponents/NavUserButton";
 import React from "react";
 // import { controlledRender } from "utils/controlledRendering";
 const Header: React.FC = () => {
 
   const { user } = useUser();  
   const authHandling = () => {
-    if(!user){
+    if(!user || user === undefined){
       return <NavAuthButtons/>
     }else{
       return <NavUserButton/>

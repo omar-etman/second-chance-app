@@ -5,12 +5,12 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { User } from '@prisma/client';
 import { createClient } from '@supabase/supabase-js';
-import { useUser } from '@supabase/supabase-auth-helpers/react';
+// import { useUser } from '@supabase/supabase-auth-helpers/react';
 import { SignUpFormValues } from 'types';
 const Signup: React.FC = () => {
-
+  const signUpPoster = "/assets/images/signup-poster.jpg"
   const router = useRouter();
-  const { user } = useUser();
+  // const { user } = useUser();
   
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL! || " ",
@@ -91,7 +91,7 @@ const Signup: React.FC = () => {
               type={f.type}
               id={f.name}
               name={f.name}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-900"
               placeholder={f.placeholder}
               onBlur={formik.handleBlur}
               value={f.formValue}
@@ -108,12 +108,12 @@ const Signup: React.FC = () => {
     <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <div className="flex flex-col items-center justify-center lg:col-span-1 md:col-span-1 ">
         <div className="mt-0 md:mt-[2.5rem] w-4/5">
-          <div className='relative flex flex-row items-center justify-center w-full mt-5 mb-5 h-30'>
+          <div className='relative flex flex-row items-center justify-center w-full mt-2 mb-9 h-30'>
             <Image
               src="/assets/images/logo-white.png"
               alt="logo"
-              width={120}
-              height={120}
+              width={100}
+              height={100}
               objectFit="contain"
             />
           </div>
@@ -140,12 +140,17 @@ const Signup: React.FC = () => {
 
       <div className="lg:col-span-2 md:col-span-1 relative h-[100%] hidden md:block">
         <Image
-          src="/assets/images/signup-poster.jpg"
+          src={signUpPoster}
           alt="sign up poster"
           layout="fill"
           objectFit="cover"
         />
       </div>
+      {/* <div
+      className="hidden w-full h-full min-h-screen p-0 m-0 bg-fixed bg-right bg-no-repeat bg-contain lg:block lg:col-span-2"
+      style={{ backgroundImage: `url(${signUpPoster})` }}
+       />
+       */}
     </div>
   );
 };

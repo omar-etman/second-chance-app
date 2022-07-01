@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import React, { Fragment } from "react";
-import { resources } from "../utils/navTabs";
+import { resources } from "../../utils/navTabs";
 
 const NavBarDropDown: React.FC = () => {
   return (

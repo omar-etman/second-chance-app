@@ -1,7 +1,7 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import React, { Fragment, ReactElement } from "react";
 import Image from "next/image";
-import {classNames} from '../utils/classNames'
+import {classNames} from '../../utils/classNames'
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { createClient } from '@supabase/supabase-js'
 import { useRouter } from "next/router";
@@ -13,10 +13,11 @@ const NavUserButton: React.FC = () => {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
   const router = useRouter();
   const signoutWithGoogle = async () => {
-    const { error } = await supabase.auth.signOut();
-    // return error
-    // router.push("/");
-}
+    const { error } = await supabase.auth.signOut(); 
+  }
+
+  const firstNameAndLastName = `${user?.user_metadata.firstName} ${user?.user_metadata.lastName}`
+  const userName = `${user?.user_metadata.name}`
   
   
   return (
@@ -25,7 +26,7 @@ const NavUserButton: React.FC = () => {
         <Menu.Button className="flex px-3 text-sm rounded-full focus:outline-none focus:ring-0 focus:ring-offset-0">
           <span className="sr-only">Open user menu</span>
           <div className="flex flex-row items-center justify-center">
-            <span className='mr-3 font-light text-gray-200 text-[1.2rem] transition-all duration-300 hover:text-white'>{`${user?.user_metadata.firstName} ${user?.user_metadata.lastName}`}</span>
+            <span className='mr-3 font-light text-gray-200 text-[1.2rem] transition-all duration-300 hover:text-white'>{userName || firstNameAndLastName}</span>
             <div className="relative transition-all rounded-full h-9 w-9">
               <Image
                 src={user?.user_metadata.avatar_url || dummyAvatar}

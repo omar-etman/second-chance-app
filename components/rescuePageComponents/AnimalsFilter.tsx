@@ -62,7 +62,7 @@ const AnimalsFilter: React.FC<props> = ({filterBy, setFilterBy}) => {
                   <>
                     <div className="flex flex-row-reverse items-center justify-between">
                       <div className="relative flex-shrink-0 w-6 h-6 rounded-full">
-                        <Image src={sp.imageUrl} alt="" layout='fill' objectFit='cover'className="overflow-hidden"/> 
+                        <Image src={sp.imageUrl} alt="" layout='fill' objectFit='cover'className="inline-block w-10 h-10 rounded-full"/> 
                       </div>
                       <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{sp.name}</span>
                     </div>

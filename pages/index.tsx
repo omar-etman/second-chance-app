@@ -1,5 +1,5 @@
 import FeaturesList from "components/homePageComponents/FeaturesList";
-import Layout from "components/Layout";
+import Layout from "components/generalAppComponents/Layout";
 import HomePageIntro from "components/homePageComponents/HomePageIntro";
 import FeaturesDisplay from "components/homePageComponents/FeaturesDisplay";
 import HomePageBottomBanner from "components/homePageComponents/HomePageBottomBanner";

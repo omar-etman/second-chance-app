@@ -4,7 +4,7 @@ import useSWR from "swr";
 import AnimalCard from "./AnimalCard";
 import AnimalsFilter from "./AnimalsFilter";
 import { Animal, Rescue, Image as AnimPic } from "@prisma/client";
-import Loader from "../Loader";
+import Loader from "../generalAppComponents/Loader";
 
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);

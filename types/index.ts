@@ -110,7 +110,7 @@ export type AdoptionRequestFormValues = {
     gender: string; 
     species: string;
     dateOfBirth: Date | any; 
-    images: AnimPic[];
+    images: string[];
 }
 
 export type Option = {
@@ -134,5 +134,6 @@ export type FormFieldProps = {
     name:string
     placeholder?:string
     options?:Option[]
+    setFieldValue?:(value: string) => void,
 }
 

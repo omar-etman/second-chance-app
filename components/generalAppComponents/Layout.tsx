@@ -10,7 +10,7 @@ const Layout:React.FC<props> = ({children}) => {
   const [open, setOpen] = useState(false)
   return (
     <div className="w-full p-0 m-0">
-        <header className="fixed z-50 w-full bg-teal-900">
+        <header className="fixed z-50 w-full bg-teal-900 shadow-xl">
             <Header/>
         </header>
         <main className="min-h-screen bg-teal-900">

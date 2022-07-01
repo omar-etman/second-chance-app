@@ -1,13 +1,11 @@
 import AnimalsList from "components/rescuePageComponents/AnimalsList";
-import Layout from "components/Layout";
-import React from "react";
+import Layout from "components/generalAppComponents/Layout";
 import Link from "next/link";
 import FadeInTrans2 from "components/transitionComponents/FadeInTrans2";
 import FadeInTrans1 from "components/transitionComponents/FadeInTrans1";
 import FadeInTrans3 from "components/transitionComponents/FadeInTrans3";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
-import SingleRouteBottomBanner from "components/homePageComponents/HomePageBottomBanner";
+import RescuePageBottomBanner from "components/rescuePageComponents/RescuePageBottomBanner";
 
 const quote = `“Love the animals, God has given them the rudiments of thought and joy untroubled.”`
 const author = `-Fyodor Dostoevsky.`
@@ -21,7 +19,7 @@ const Rescue: React.FC = () => {
   const noUserRender = () => {
     if (user) {
       return null;
-    } else if (!user || user === null || undefined) {
+    } else if (!user || user === null || user === undefined) {
       return (
         <p className="w-4/5 text-2xl font-light text-center text-white mt-9">
           <FadeInTrans3>
@@ -73,7 +71,7 @@ const Rescue: React.FC = () => {
           </h1>
           <AnimalsList />
         </div>
-        <div
+        {/* <div
           className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover h-[45rem] md:h-[50rem] lg:h-[40rem] p-0"
           style={{
             backgroundImage: `url(${BannerBg})`,
@@ -90,7 +88,7 @@ const Rescue: React.FC = () => {
               <a className="text-2xl text-gray-100">Wanna ask something ?</a>
             </Link>
           </button>
-        </div>
+        </div> */}
         {/* <SingleRouteBottomBanner
           quote={quote}
           author={author}
@@ -98,6 +96,13 @@ const Rescue: React.FC = () => {
           nextRoute={nextRoute}
           BannerBg={BannerBg}
         /> */}
+        <RescuePageBottomBanner
+          quote={quote}
+          author={author}
+          buttonSpan={buttonSpan}
+          nextRoute={nextRoute}
+          BannerBg={BannerBg}
+        />
       </>
     </Layout>
   );

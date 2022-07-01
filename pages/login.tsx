@@ -1,7 +1,7 @@
 import { useUser } from '@supabase/supabase-auth-helpers/react';
 import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
-import Logo from '../components/Brand'
+import Logo from '../components/generalAppComponents/Brand'
 import { useRouter } from 'next/router';
 import { authState } from 'slices/auth.slice';
 import {authFullUser} from 'slices/auth.slice';
@@ -12,7 +12,7 @@ import FadeInTrans3 from 'components/transitionComponents/FadeInTrans3';
 import FadeInTrans2 from 'components/transitionComponents/FadeInTrans2';
 import FadeInTrans1 from 'components/transitionComponents/FadeInTrans1';
 import { useCallback, useEffect } from 'react';
-import EmailSignIn from 'components/EmailSignIn';
+import EmailSignIn from 'components/loginPageComponents/EmailSignIn';
 
 
 // type props = {};

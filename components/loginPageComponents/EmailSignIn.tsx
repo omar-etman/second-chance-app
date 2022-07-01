@@ -4,8 +4,14 @@ type props = {
   signInWithEmail: () => Promise<void>
 }
 
+export type SignInInfo = {
+  email: string;
+  password: string;
+};
 
 const EmailSignIn:React.FC<props> = ({signInWithEmail}) => {
+
+  
   return (
     <>
       {/*

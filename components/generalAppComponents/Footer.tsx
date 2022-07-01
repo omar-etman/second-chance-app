@@ -9,8 +9,8 @@ const Footer:React.FC = () => {
     <div className='flex flex-col-reverse justify-around w-full items-ceter md:flex-row'>
         <FooterBrand/>
         <div className = "flex flex-row items-center justify-center">
-          <span className='text-gray-100 font-light mr-[7rem]'>Follow us : </span>
-          <ul className='flex flex-row items-center justify-around text-gray-100 mt-2'>
+          <span className='hidden md:flex text-gray-100 font-light mr-[7rem]'>Follow us : </span>
+          <ul className='hidden lg:flex flex-row items-center justify-around text-gray-100 mt-2'>
               <li>
                 <FacebookIcon/>
               </li>

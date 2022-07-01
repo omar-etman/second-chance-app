@@ -4,17 +4,17 @@ import { FormControlProps, Option } from 'types';
     //revisit the empty arrays issue
 
     const speciesOptions:Option[] = [
-      { key: `Select your pet's species`, value: '' },
-      { key: 'Option 1', value: 'dog'},
-      { key: 'Option 2', value: 'cat' },
-      { key: 'Option 3', value: 'bird' },
-      { key: 'Option 4', value: 'reptile'}
+      { key: `Select your pet's species`, value: 'none' },
+      { key: 'Dog', value: 'dog'},
+      { key: 'Cat', value: 'cat' },
+      { key: 'Bird', value: 'bird' },
+      { key: 'Reptile', value: 'reptile'}
     ]
   
     const genderOptions:Option[] = [
-      { key: `Select your pet's gender`, value: '' },
-      { key: 'Option 1', value: 'male'},
-      { key: 'Option 2', value: 'female'},
+      { key: `Select your pet's gender`, value: 'none' },
+      { key: 'Male', value: 'male'},
+      { key: 'Female', value: 'female'},
     ]
     
     export const formFields:FormControlProps[] = [
@@ -59,6 +59,15 @@ import { FormControlProps, Option } from 'types';
       },
       {
         key:6,
+        name:'images',
+        label:"Upload a photo or more",
+        control:'imageUpload',
+        placeholder:"Upload your photos here",
+        type:"file",
+        // setFieldValue={(url) => props.setFieldValue('avatarURL', url)}
+      },
+      {
+        key:7,
         name:'story',
         label: 'tell us the story',
         placeholder: 'this entry helps us introduce your pet more efficiently to our users. nothing big just a simple summary will do',
@@ -66,7 +75,7 @@ import { FormControlProps, Option } from 'types';
         type:'story',
       },
       {
-        key:7,
+        key:8,
         name:'traits',
         label: `Every pet has a set of identifying traits, write some of your pet's =D`,
         control:'textarea',
@@ -74,12 +83,11 @@ import { FormControlProps, Option } from 'types';
         type:'traits',
       },
       {
-        key:8,
+        key:9,
         name:'requirements',
         label: `What would you expect from the future owner to provide for the welfare of your pet?`,
         control:'textarea',
         placeholder: 'specific species that your pet is not good with, precautions to be taken etc ....',
         type:'requirements',
-      }
-      
+      }    
     ]

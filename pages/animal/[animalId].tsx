@@ -1,9 +1,9 @@
-import Layout from "components/Layout";
+import Layout from "components/generalAppComponents/Layout";
 import React, { useState } from "react";
 import useSWR from "swr";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Loader from "components/Loader";
+import Loader from "components/generalAppComponents/Loader";
 import AnimalDetails from "components/animalIdPageComponents/AnimalInfo";
 import AnimalInfo from "components/animalIdPageComponents/AnimalInfo";
 import AnimalPageBanner from "components/animalIdPageComponents/AnimalPageBanner";

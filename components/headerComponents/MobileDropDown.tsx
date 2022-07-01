@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement, ReactNode } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import BrandDk from "./BrandDk";
+import BrandDk from "../generalAppComponents/BrandDk";
 import { XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { Resources, NavRoutes, AuthRoutes } from "types";

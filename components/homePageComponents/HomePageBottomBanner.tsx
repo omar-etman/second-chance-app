@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 
 type props = {
   quote: string;
@@ -14,7 +12,7 @@ const HomePageBottomBanner: React.FC<props> = ({
   author,
   buttonSpan,
   nextRoute,
-  BannerBg
+  BannerBg,
 }) => {
   const router = useRouter();
   const routeToPage = () => {

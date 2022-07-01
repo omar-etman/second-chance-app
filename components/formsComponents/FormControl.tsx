@@ -2,6 +2,7 @@ import { OptionUnstyled } from '@mui/base'
 import React from 'react'
 import { FormControlProps } from 'types'
 import DatePicker from './DatePicker'
+import ImageInput from './ImageInput'
 import Input from './Input'
 import Select from './Select'
 import TextArea from './TextArea'
@@ -16,8 +17,8 @@ const FormControl:React.FC<FormControlProps> = (props) => {
         return <TextArea {...rest} />
       case 'select':
         return <Select {...rest} />
-      // case 'imagesInput':
-      //   return <ImagesInput {...rest}/>
+      case 'imageUpload':
+        return <ImageInput {...rest}/>
       case 'date':
         return <DatePicker {...rest} />
       default:

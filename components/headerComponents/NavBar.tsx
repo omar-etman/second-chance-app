@@ -1,10 +1,10 @@
 import { ReactElement } from 'react'
 import { Popover} from '@headlessui/react'
-import { navRoutes} from '../utils/navTabs'
+import { navRoutes} from '../../utils/navTabs'
 import Link from 'next/link';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import NavBarDropDown from './NavBarDropDown';
-import {classNames} from '../utils/classNames'
+import {classNames} from '../../utils/classNames'
 
 const NavBar:React.FC = () => {
   return (

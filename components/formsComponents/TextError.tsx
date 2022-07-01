@@ -5,8 +5,8 @@ type props = {
 };
 const TextError:React.FC<props> = ({children}) => {
   return (
-    <div className='flex flex-col items-center justify-start'>
-        <span className='text-orange-500'>Error</span>
+    <div className='flex flex-row items-center justify-start'>
+        <span className='text-gray-200 mr-1'>Error:</span>
         {children}
     </div> 
   )

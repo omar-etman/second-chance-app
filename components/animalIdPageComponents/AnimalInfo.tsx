@@ -1,5 +1,5 @@
 import ImageSelector from "./ImageSelector";
-import Loader from "../Loader";
+import Loader from "../generalAppComponents/Loader";
 import { dateFormat } from "utils/dateFormats";
 import {Animal, Image as AnimPic} from "@prisma/client";
 import AnimalDetails from "./AnimalDetails";
