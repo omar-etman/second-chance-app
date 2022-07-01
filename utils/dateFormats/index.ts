@@ -13,9 +13,15 @@ export const dateFormat = (inputDate: string | number | Date | null, format: str
     const year = date.getFullYear();
     
     //declare format strings
+<<<<<<< HEAD
     const dayFormatString  = "dd"
     const monthFormatString = "mm"
     const yearFormatString = "yyyy"
+=======
+    const dayFormatString  = "dd" || "DD"
+    const monthFormatString = "mm" || "MM"
+    const yearFormatString = "yyyy" || "YYYY"
+>>>>>>> 912313e7c2655cfb43eced0a01f2cb128644c35a
 
     //replace the month
     format = format.replace(monthFormatString, month.toString().padStart(2,"0"));        
