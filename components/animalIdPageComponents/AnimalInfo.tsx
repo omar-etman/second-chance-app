@@ -27,7 +27,8 @@ const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
     const milliSecondsDiff = currentDate - previousDate
     const daysDiff =  Math.round(milliSecondsDiff / 86400000)
     const monthsDiff = Math.round(milliSecondsDiff  / 2629746000)
-    const yearsDiff = monthsDiff / 12
+    const yearsDiff = Math.round(monthsDiff / 12)
+    
     if(monthsDiff < 1){
       return `${daysDiff} days`
     } else if (monthsDiff === 1) {
@@ -35,7 +36,7 @@ const AnimalInfo: React.FC<props> = ({ animal, openDialog }) => {
     } else if (monthsDiff === 12) {
       return `${yearsDiff} year`
     } else if (monthsDiff > 12) {
-      return  `${yearsDiff} years & ${monthsDiff - 12} months`
+      return  `${yearsDiff} years`
     } else if (monthsDiff > 12 && yearsDiff === 1){
       return `${yearsDiff} year & ${monthsDiff - 12} months`
     } else { 

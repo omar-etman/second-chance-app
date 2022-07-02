@@ -14,8 +14,8 @@ const AnimalsList: React.FC = () => {
   const [filterBy, setFilterBy] = useState("all");
 
   const filtering = () => {
-    const filteredAnimals = data.filter((f: { species: { name: string; }; }) => f.species.name === filterBy)
     const unrescuedAnimals = data.filter((f: { Rescue: Rescue[] }) => f.Rescue.length === 0)
+    const filteredAnimals = unrescuedAnimals.filter((f: { species: { name: string; }; }) => f.species.name === filterBy)
     if (filterBy === "all") {
       return (
         <ul className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">

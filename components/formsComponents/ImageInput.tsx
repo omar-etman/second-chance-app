@@ -72,6 +72,8 @@ const ImageInput: React.FC<FormFieldProps> = ({
         const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
         setPhotos((prevPhotos) => [...prevPhotos, url]);
       }
+      return photos
+      
     } catch (error) {
       console.log({ error });
     } finally {
@@ -94,9 +96,9 @@ const ImageInput: React.FC<FormFieldProps> = ({
         <p className="text-xs text-gray-300">PNG, JPG, GIF up to 10MB</p>
           <label
             htmlFor={name}
-            className="relative font-medium text-teal-700 cursor-pointer hover:text-[#10ABB4] flex flex-col justify-center items-center"
+            className="relative flex flex-col items-center justify-center font-medium text-[#10ABB4] cursor-pointer hover:text-teal-700"
           >
-              <span>
+              <span className="text-[1.1rem] mt-1">
                 Browse
               </span>
               <Field
