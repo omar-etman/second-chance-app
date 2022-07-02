@@ -106,9 +106,10 @@ const ImageInput: React.FC<FormFieldProps> = ({
                 id={name}
                 name={name}
                 type={type}
+                setFieldValue={onPhotoUpload}
                 multiple
                 accept=".jpg, .png, .gif"
-                onChange={onPhotoUpload}
+                // onChange={onPhotoUpload}
                 className="sr-only"
               /> 
           </label>

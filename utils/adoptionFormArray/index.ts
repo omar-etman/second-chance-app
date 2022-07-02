@@ -89,5 +89,6 @@ import { FormControlProps, Option } from 'types';
         control:'textarea',
         placeholder: 'specific species that your pet is not good with, precautions to be taken etc ....',
         type:'requirements',
-      }    
+      }
+    
     ]

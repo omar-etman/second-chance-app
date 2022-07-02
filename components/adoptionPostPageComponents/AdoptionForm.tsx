@@ -50,6 +50,7 @@ const AdoptionForm: React.FC = () => {
         type={fld.type}
         label={fld.label}
         name={fld.name}
+        // setFieldValue={(array) => setFieldValue('images', url)}
         placeholder={fld.placeholder}
         options={fld.options}
       />

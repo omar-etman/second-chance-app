@@ -6,7 +6,7 @@ import React from "react";
 const poster = "/assets/images/adoption-poster-4.jpg";
 
 const AdoptionPost: React.FC = () => {
-  const user = useUser();
+  // const user = useUser();
   //will be needed for route protection
   return (
     <Layout>
