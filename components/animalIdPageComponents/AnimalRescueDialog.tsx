@@ -3,9 +3,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
-import prisma from "prismaCient";
-import useSWR from "swr";
 import axios from "axios";
+
 type props = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;

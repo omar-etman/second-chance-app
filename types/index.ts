@@ -1,7 +1,14 @@
 import { Animal, Gender, Image as AnimPic } from '@prisma/client';
+import { FormikFormProps } from 'formik';
 import { DateTime } from 'luxon';
 import { SVGProps } from "react";
 
+//LogIn
+export type LogInInfo = {
+    email: string;
+    password: string;
+};
+//---------------------
 //header nav arrays
 export type Resources = {
     key: number;
@@ -118,14 +125,16 @@ export type Option = {
     value:string
 }
 
-export type FormControlProps = {
+export interface FormControlProps extends FormikFormProps {
   key:number
-  control:string
+  control:'input' | 'textarea' | 'select' | 'imageUpload' | 'date'
   type:string
   label:string
   name:string
   placeholder?:string
   options?:Option[]
+  setFieldValue?:(value: string[]) => void
+  value?: any //TODO: Omar will change
 }
 
 export type FormFieldProps = {
@@ -134,6 +143,6 @@ export type FormFieldProps = {
     name:string
     placeholder?:string
     options?:Option[]
-    setFieldValue?:(value: string) => void,
+    setFieldValue?:(value: string[]) => void,
 }
 

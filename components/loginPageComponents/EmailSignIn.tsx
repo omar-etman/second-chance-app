@@ -1,36 +1,28 @@
 import { LockClosedIcon } from "@heroicons/react/outline"
+import Link from "next/link";
 
 type props = {
   signInWithEmail: () => Promise<void>
 }
 
-export type SignInInfo = {
-  email: string;
-  password: string;
-};
+
 
 const EmailSignIn:React.FC<props> = ({signInWithEmail}) => {
 
   
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
-      <div className="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex items-center justify-center min-h-full px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-4">
           <div>
-            <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-100">Sign in to your account</h2>
+            <h2 className="mt-6 text-3xl font-medium text-center text-gray-100">Login</h2>
             <p className="mt-2 text-sm text-center text-gray-300">
               Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                start your 14-day free trial
-              </a>
+              <Link href='/signup'>
+                <a className="font-medium text-teal-600 transition-all duration-200 hover:text-[#9C3E00]">
+                  sign up for an accout
+                </a>
+              </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
@@ -46,7 +38,7 @@ const EmailSignIn:React.FC<props> = ({signInWithEmail}) => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-[#9C3E00] focus:border-[#9C3E00] focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -60,40 +52,16 @@ const EmailSignIn:React.FC<props> = ({signInWithEmail}) => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-[#9C3E00] focus:border--[#9C3E00] focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
             </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                />
-                <label htmlFor="remember-me" className="block ml-2 text-sm text-gray-900">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm  px-5 py-3 text-center self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00]"
               >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="w-5 h-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                </span>
                 Sign in
               </button>
             </div>

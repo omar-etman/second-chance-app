@@ -1,92 +1,135 @@
-import { useUser } from '@supabase/supabase-auth-helpers/react';
-import { createClient } from '@supabase/supabase-js';
-import Image from 'next/image';
-import Logo from '../components/generalAppComponents/Brand'
-import { useRouter } from 'next/router';
-import { authState } from 'slices/auth.slice';
-import {authFullUser} from 'slices/auth.slice';
-import { useAppDispatch, useAppSelector } from 'store/hook';
-import useSWR from 'swr';
-import axios from 'axios';
-import FadeInTrans3 from 'components/transitionComponents/FadeInTrans3';
-import FadeInTrans2 from 'components/transitionComponents/FadeInTrans2';
-import FadeInTrans1 from 'components/transitionComponents/FadeInTrans1';
-import { useCallback, useEffect } from 'react';
-import EmailSignIn from 'components/loginPageComponents/EmailSignIn';
-
-
+import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { createClient } from "@supabase/supabase-js";
+import Image from "next/image";
+import Logo from "../components/generalAppComponents/Brand";
+import { useRouter } from "next/router";
+import { routingState } from "slices/routing.slice";
+import { setPendingRoute } from "slices/routing.slice";
+import { useAppDispatch, useAppSelector } from "store/hook";
+import FadeInTrans3 from "components/transitionComponents/FadeInTrans3";
+import FadeInTrans2 from "components/transitionComponents/FadeInTrans2";
+import FadeInTrans1 from "components/transitionComponents/FadeInTrans1";
+import { useCallback, useEffect } from "react";
+import { LogInInfo } from "types";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Link from "next/link";
 // type props = {};
 
-// const dbFetcher = (url:string) => axios.get(url).then((res) => res.data)
-const LogIn:React.FC = () => {
-  
-  
-  const { user } = useUser();
-  // const { fullUser } = useAppSelector(authState);
+const LogIn: React.FC = () => {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-  // const {data, error} = useSWR(`/api/user/${user?.id}`, dbFetcher )
-  
-  
+  //to re route back
+  const pendingRoute = useAppSelector(routingState)
+  //----------------
   const router = useRouter();
-  const loginWithGoogle = async () => {
-    const { user, session, error } = await supabase.auth.signIn({
-      provider: 'google'
-    });
-    // if(data){
-    //   router.push('/');
-    // }else{
-    //   router.push('/signup')
-    // }
-    
-    console.log({ user, session, error });
+  // const loginWithGoogle = async () => {
+  //   const { user, session, error } = await supabase.auth.signIn({
+  //     provider: "google",
+  //   });
+  //   if(data){
+  //     router.push('/');
+  //   }else{
+  //     router.push('/signup')
+  //   }
+
+  //   console.log({ user, session, error });
+  // };
+
+  // const loginWithFaceBook = async () => {
+  //   const { user, session, error } = await supabase.auth.signIn({
+  //     provider: "facebook",
+  //   });
+  //   if(data){
+  //     router.push('/');
+  //   }else{
+  //     router.push('/signup')
+  //   }
+  //   console.log({ user, session, error });
+  // };
+
+  
+  
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const loginWithFaceBook = async () => {
-    const { user, session, error } = await supabase.auth.signIn({
-      provider: 'facebook'
+  const loginWithEmail = async (values: LogInInfo) => {
+    await supabase.auth.signIn({
+      email: values.email,
+      password: values.password,
     });
-    // if(data){
-    //   router.push('/');
-    // }else{
-    //   router.push('/signup')
-    // }
-    console.log({ user, session, error });
+    router.push("/");
   };
 
-  const signInWithEmail = async () => {
-    const { user, session, error } = await supabase.auth.signIn({
-      //check if the email & the password exist in db
-      // if not route to signUp or return error
-      email: '',
-      password: 'example-password',
-    })
+  const formik = useFormik({
+    initialValues: initialValues,
+    onSubmit: async (values: LogInInfo) => {
+      console.log(values)
+      loginWithEmail(values);
+      formik.resetForm();
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email().required("*Required"),
+      password: Yup.string().required("*Required"),
+    }),
+  });
+
+  const LogInFormFeilds = [
+    {key:0, name:'email',formValue:formik.values.email, label:`Email`, type:'string', placeholder:`johndoe@example.come`},
+    {key:1, name:'password',formValue:formik.values.password, label:`Password`, type:'password', placeholder:`xxxxxxxxxxxxxxxxxxx`},
+  ]
+
+  const logInFormMapper = () => {
+    return (
+      LogInFormFeilds.map((f) => (
+        <div className="mb-6" key={f.key}>
+          <label className="block mb-1 text-sm font-light text-gray-100 ">
+            {f.label}
+          </label>
+              <input
+              type={f.type}
+              id={f.name}
+              name={f.name}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-900"
+              placeholder={f.placeholder}
+              onBlur={formik.handleBlur}
+              value={f.formValue}
+              onChange={formik.handleChange}
+              required
+              />
+        </div>    
+      ))
+    )
   }
+
+
+  //formik
 
   // const getFullUser = useCallback( async () => {
   //   if (user && !data || data === null || undefined) {
   //     router.push('/signup');
   //   } else if (user && data) {
-  //     router.push('/'); 
+  //     router.push('/');
   //   } else if (!user) {
   //     return
   //   }
-  // }, [user, data, router]) 
+  // }, [user, data, router])
 
-  useEffect(() => {
-  if(!user){
-    router.push('/signup')
-  } else {
-    return
-  }
-  }, [router, user]);
-
+  // useEffect(() => {
+  // if(!user){
+  //   router.push('/signup')
+  // } else {
+  //   return
+  // }
+  // }, [router, user]);
 
   // console.log(data)
 
-  console.log({ user });
+  // console.log({ user });
 
   // if(!user){
   //   router.push('/signup')
@@ -97,56 +140,61 @@ const LogIn:React.FC = () => {
   return (
     <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <div className="flex items-center justify-center h-screen lg:col-span-1 md:col-span-1">
-        <div className="px-4 mb-[2rem]">
+        <div className="px-4 mb-[2rem] w-full">
           {/* into block */}
-        <div className='flex flex-col items-center justify-center mb-[2.5rem]'>
-            <div className='relative mb-2 h-25'>
-              <FadeInTrans1>  
+          <div className="flex flex-col items-center justify-center mb-[2.5rem]">
+            <div className="relative mb-2 h-25">
+              <FadeInTrans1>
                 <Image
-                src="/assets/images/logo-white.png"
-                alt="logo"
-                width={170}
-                height={170}
-                objectFit="contain"
+                  src="/assets/images/logo-white.png"
+                  alt="logo"
+                  width={170}
+                  height={170}
+                  objectFit="contain"
                 />
               </FadeInTrans1>
             </div>
-            <div className='text-center font-thin text-[2.5rem]'>
+            <div className="text-center font-thin text-[2.5rem]">
               <FadeInTrans2>
-                <span className='border-b'>Second Chance</span> 
+                <span className="border-b">Second Chance</span>
               </FadeInTrans2>
             </div>
-            <div className='font-light text-center text-[1.2rem] leading-0'>
+            <div className="font-light text-center text-[1.2rem] leading-0">
               <FadeInTrans3>
-                <span>we rescue them ... they save us.</span> 
+                <span>we rescue them ... they save us.</span>
               </FadeInTrans3>
             </div>
-            {/* <p className='font-[0.3rem]'>we rescue them ... they save us</p> */}
-        </div>
-        {/* SIGNIN LABEL */}
-          <div className="flex-col items-center justify center">
-            <h1 className="pt-2 pb-2 text-3xl font-bold">
-              Sign in to your account
-            </h1>
-            <span className="">Or create a new acount</span>
           </div>
-          
-          <div className="w-full mt-6">
-            <EmailSignIn
-              signInWithEmail={signInWithEmail}
-            />
-            <button
-              onClick={() => loginWithGoogle()}
-              className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm  px-5 py-3 text-center self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00]"
-            >
-              GOOGLE
-            </button>
-            <button
-              onClick={() => loginWithFaceBook()}
-              className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm  px-5 py-3 text-center self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00]"
-            >
-              FACEBOOK
-            </button>
+          <div className="w-full mt-2">
+          <div className="flex items-center justify-center min-h-full px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-4">
+          <div>
+            <h2 className="mt-6 text-3xl font-light text-Left text-gray-100">Login to your account</h2>
+            <p className="mt-2 text-sm text-left text-gray-300">
+              Or{' '}
+              <Link href='/signup'>
+                <a className="font-medium text-teal-600 transition-all duration-200 hover:text-[#9C3E00]">
+                  sign up for a new one
+                </a>
+              </Link>
+            </p>
+          </div>
+          <form className="mt-8 space-y-6" action="#" method="POST">
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div className="-space-y-px rounded-md shadow-sm">
+              {logInFormMapper()}
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="text-white bg-[#502000] focus:outline-none  font-medium rounded-lg text-sm  px-5 py-3 text-center self-center w-full mb-5 transition-all duration-200 hover:bg-[#9C3E00]"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
           </div>
         </div>
       </div>
@@ -160,7 +208,7 @@ const LogIn:React.FC = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LogIn;

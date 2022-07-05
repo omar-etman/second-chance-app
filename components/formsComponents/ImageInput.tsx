@@ -1,21 +1,25 @@
 import { Field, useFormikContext } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormFieldProps } from "types";
-import Image from "next/image";
 import { v4 as MakeId } from "uuid";
 import { supabase } from "utils/supabase";
 import FormUploadedPhotos from "components/adoptionPostPageComponents/FormUploadedPhotos";
+import { CircularProgress } from "@mui/material";
 
 const ImageInput: React.FC<FormFieldProps> = ({
   label,
   name,
   type,
+  setFieldValue,
   ...rest
 }) => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const imageUploadPlaceholder = () => {
+    if (loading) {
+      return <CircularProgress />;
+    }
     return (
       <>
         <svg
@@ -37,14 +41,11 @@ const ImageInput: React.FC<FormFieldProps> = ({
     );
   };
 
-  const imageUploadArea = () => {
+  const ImageUploadArea = () => {
     if (photos && photos.length > 0) {
       return (
         <div className="w-full p-2">
-          <FormUploadedPhotos
-            photos={photos}
-            setPhotos={setPhotos}
-          /> 
+          <FormUploadedPhotos photos={photos} setPhotos={setPhotos} />
         </div>
       );
     } else {
@@ -52,7 +53,7 @@ const ImageInput: React.FC<FormFieldProps> = ({
     }
   };
 
-  const onPhotoUpload = async (event: React.ChangeEvent<HTMLInputElement> ) => {
+  const onPhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const fileListObj = event.target.files;
       if (!fileListObj) return;
@@ -72,8 +73,8 @@ const ImageInput: React.FC<FormFieldProps> = ({
         const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
         setPhotos((prevPhotos) => [...prevPhotos, url]);
       }
-      return photos
-      
+
+      return photos;
     } catch (error) {
       console.log({ error });
     } finally {
@@ -81,37 +82,39 @@ const ImageInput: React.FC<FormFieldProps> = ({
     }
   };
 
+  useEffect(() => {
+    setFieldValue?.(photos);
+  }, [photos, setFieldValue]);
+
   return (
     <div className="mb-3 text-gray-100">
       <label htmlFor="cover-photo" className="block text-sm font-medium">
         {label}
       </label>
       <div className="flex flex-col items-center justify-center px-6 pt-5 pb-6 mt-1 border-2 border-gray-300 border-dashed rounded-md">
-        <div className="space-y-1 text-center">{imageUploadArea()}</div>
+        <div className="space-y-1 text-center">
+          <ImageUploadArea />
+        </div>
         <div className="flex flex-col items-center justify-center text-sm text-gray-600">
-        <span className="font-medium text-[#10ABB4] bg-none p-3 rounded-1xl flex flex-col justify-center items-center">
-          {`selected images : ${photos.length}`}
-        </span>
-        {/* <p className="pl-1">or drag and drop</p> */}
-        <p className="text-xs text-gray-300">PNG, JPG, GIF up to 10MB</p>
+          <span className="font-medium text-[#10ABB4] bg-none p-3 rounded-1xl flex flex-col justify-center items-center">
+            {`selected images : ${photos.length}`}
+          </span>
+          <p className="text-xs text-gray-300">PNG, JPG, GIF up to 10MB</p>
           <label
             htmlFor={name}
             className="relative flex flex-col items-center justify-center font-medium text-[#10ABB4] cursor-pointer hover:text-teal-700"
           >
-              <span className="text-[1.1rem] mt-1">
-                Browse
-              </span>
-              <Field
-                {...rest}
-                id={name}
-                name={name}
-                type={type}
-                setFieldValue={onPhotoUpload}
-                multiple
-                accept=".jpg, .png, .gif"
-                // onChange={onPhotoUpload}
-                className="sr-only"
-              /> 
+            <span className="text-[1.1rem] mt-1">Browse</span>
+            <Field
+              {...rest}
+              id="images"
+              name="images"
+              type={type}
+              multiple
+              accept=".jpg, .png, .gif"
+              onChange={onPhotoUpload}
+              className="sr-only"
+            />
           </label>
         </div>
       </div>
