@@ -40,8 +40,6 @@ const AdoptionForm: React.FC = () => {
     values: AdoptionRequestFormValues,
     resetForm: any
   ) => {
-    console.log(values);
-
     const petInfo = {
       name:values.petName,
       species:values.species,
@@ -54,10 +52,15 @@ const AdoptionForm: React.FC = () => {
       images:images
     }
     console.log('req.body', petInfo)
-    const res = axios.post('/api/animals', petInfo)
-    const data = await res
-    console.log("adoptionPost",data)
-    resetForm();
+    try{
+      const res = axios.post('/api/animals', petInfo)
+      const data = await res
+      console.log("adoptionPost",data)
+      resetForm();
+      return data
+    } catch (err) {
+      console.log({ msg: 'something went wrong', details: err })
+    }
   };
 
   const formFieldMapper = () => {

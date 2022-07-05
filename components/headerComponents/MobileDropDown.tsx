@@ -72,6 +72,7 @@ const MobileDropDown:React.FC<props> = ({resources, navRoutes, authRoutes}) => {
                   </Link>
                 ))}
               </div>
+              {/* that div is to be conditionally rendered */}
               <div>
               <Link href="/signup">
                 <a className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-teal-700 border border-transparent rounded-md shadow-sm hover:bg-teal-900">
@@ -83,7 +84,7 @@ const MobileDropDown:React.FC<props> = ({resources, navRoutes, authRoutes}) => {
                 <p className="mt-6 text-base font-medium text-center text-gray-500">
                   Existing customer?{" "}
                   <Link href='/login'>
-                    <a className="text-indigo-600 hover:text-indigo-500">
+                    <a className="text-teal-900 hover:text-teal-700">
                       Sign in
                     </a>
                   </Link>

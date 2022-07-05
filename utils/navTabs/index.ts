@@ -21,7 +21,7 @@ export const resources:Resources = [
       name: "Pet Maps",
       description:
         "Look for any nearby vetinary clinics & pet food stores, show them your profile theyll take care of you and your friend .",
-      href: "/maps",
+      href: "/navigate",
       icon: MapIcon,
     },
     {
