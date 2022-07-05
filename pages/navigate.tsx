@@ -2,7 +2,7 @@ import React from 'react'
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import { formatRelative } from 'date-fns'
 import Layout from 'components/generalAppComponents/Layout'
-import NavMap from 'components/navigatorComponents/NavMap'
+import NavMap from 'components/navigatorPageComponents/NavMap'
 //snazzymaos.com for map styles
 
 const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY

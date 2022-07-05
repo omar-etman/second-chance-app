@@ -1,30 +1,29 @@
-import { Popover} from "@headlessui/react";
-import {MenuIcon } from "@heroicons/react/outline";
+import { Popover } from "@headlessui/react";
+import { MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Brand from "./Brand";
 import { resources, navRoutes, authRoutes } from "../../utils/navTabs/index";
 import MobileDropDown from "../headerComponents/MobileDropDown";
 import NavBar from "../headerComponents/NavBar";
 import NavAuthButtons from "../headerComponents/NavAuthButtons";
-import { useUser } from '@supabase/supabase-auth-helpers/react';
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 import NavUserButton from "../headerComponents/NavUserButton";
 import React from "react";
 // import { controlledRender } from "utils/controlledRendering";
 const Header: React.FC = () => {
+  const { user, isLoading } = useUser();
+  const AuthHandling = () => {
+    if (isLoading) return <></>;
 
-  const { user } = useUser();  
-  const authHandling = () => {
-    if(!user || user === undefined){
-      return <NavAuthButtons/>
-    }else{
-      return <NavUserButton/>
+    if (!user) {
+      return <NavAuthButtons />;
+    } else {
+      return <NavUserButton />;
     }
-  }
+  };
 
-  console.log(user)
+  console.log(user);
 
-  
-  
   return (
     <Popover className="w-full ">
       <div className="px-4 mx-auto max-w-7xl sm:px-6">
@@ -45,12 +44,12 @@ const Header: React.FC = () => {
               <MenuIcon className="flex w-6 h-6 lg:hidden" aria-hidden="true" />
             </Popover.Button>
           </div>
-          <NavBar/>
-          {authHandling()}
+          <NavBar />
+          <AuthHandling />
           {/* {controlledRender(<NavUserButton/>,<NavAuthButtons/>,user)} */}
         </div>
       </div>
-      <MobileDropDown 
+      <MobileDropDown
         resources={resources}
         navRoutes={navRoutes}
         authRoutes={authRoutes}

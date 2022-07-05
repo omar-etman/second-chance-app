@@ -8,21 +8,18 @@ import { useAppDispatch } from "store/hook";
 import React, { useEffect } from "react";
 
 const poster = "/assets/images/adoption-poster-4.jpg";
-const currentRoute = '/adoption'
-const AdoptionPost: React.FC = () => {
-  
+const currentRoute = "/adoption";
+const AdoptionPost: React.FC = (props) => {
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch();
   //route protection code
-  useEffect(() => {
-    // checks if the user is authenticated
-    const condition = authContext?.isUserAuthenticated()
-    //set the current route to be the one the user gets redirected to upon logging in
-    dispatch(setPendingRoute(currentRoute))
-    if(!condition) router.push("/login");
-   }, [authContext, dispatch, router]);
-  
+  // useEffect(() => {
+  //   // checks if the user is authenticated
+  //   const condition = authContext?.isUserAuthenticated()
+  //   if(!condition) router.push('/login');
+  //  }, [authContext, router]);
+
   return (
     <Layout>
       <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 lg:grid-cols-2 pt-9">
