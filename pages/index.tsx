@@ -10,10 +10,12 @@ const buttonSpan = `Wanna meet your future pet ?`
 const nextRoute = '/rescue'
 const BannerBg = '/assets/images/background-8.jpg'
 
-const Home: React.FC = () => {
-
+const Home: React.FC<any> = () => {
+  const isProtected = false
   return (
-    <Layout>
+    <Layout
+      isProtected={isProtected}
+    >
       <HomePageIntro/>
       <div
         className="flex flex-col items-center justify-center w-full m-0 bg-fixed bg-center bg-no-repeat bg-cover min-h-[40rem] p-0"

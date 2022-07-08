@@ -14,6 +14,11 @@ import NavPlaces from "./NavPlaces";
 type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
+type PlacesRequest = {
+  location: LatLngLiteral | undefined,
+  radius: string,
+  type:string[]
+}
 
 const defaultOptions = {
   strokeOpacity: 0.5,
@@ -44,6 +49,8 @@ const farOptions = {
   strokeColor: "#FF5252",
   fillColor: "#FF5252",
 };
+
+
 //dummy for generating clinic locations --> to be set later within a state , similar one for petFoodStores
 const generateClinics = (position: LatLngLiteral) => {
   const _vetrinaryClinics: Array<LatLngLiteral> = [];
@@ -75,11 +82,39 @@ const NavMap: React.FC = () => {
     }),
     []
   );
-  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+  const onLoad = useCallback((map:any) => (mapRef.current = map), []);
   const toggleSideControl = () => [
     setOpen(true),
     // console.log(sideControl)
   ];
+
+
+// const initialize = () => {
+//   const map = new google.maps.Map(document.getElementById('map'), {
+//     center: userZone,
+//     zoom: 15
+//   });
+//   const request = {
+//     location: userZone,
+//     radius: '500',
+//     type: ['veterinarians']
+//   };
+//   const service = new google.maps.places.PlacesService(map);
+//   service.nearbySearch(request, callback);
+//   function callback(results, status) {
+//     let placesLocations = []
+//     if (status == google.maps.places.PlacesServiceStatus.OK) {
+//       for (var i = 0; i < results.length; i++) {
+//         placesLocations.push(results[i])
+//         createMarker(results[i]);
+//       }
+//     }
+//     console.log(placesLocations)
+//   }
+// }
+
+//   initialize()
+
 
   return (
     <div className="flex h-screen">

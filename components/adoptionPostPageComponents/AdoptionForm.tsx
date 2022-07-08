@@ -5,6 +5,7 @@ import { formFields } from "utils/adoptionFormArray";
 import FormControl from "components/formsComponents/FormControl";
 import { useState } from "react";
 import axios from "axios";
+import { dateFormat } from "utils/dateFormats";
 
 const AdoptionForm: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -31,35 +32,51 @@ const AdoptionForm: React.FC = () => {
     gender: Yup.string().required("this input is required"),
     species: Yup.string().required("this input is required"),
     dateOfBirth: Yup.string().required("this input is required"),
-    images: Yup.array()
-      .of(Yup.string())
-      .required("this input is required")
+    images: Yup.array().of(Yup.string()).required("this input is required"),
   });
 
   const onSubmit = async (
     values: AdoptionRequestFormValues,
     resetForm: any
   ) => {
-    const petInfo = {
-      name:values.petName,
-      species:values.species,
-      breed:values.breed,
-      dateOfBirth:values.dateOfBirth,
-      gender:values.gender,
-      story:values.story,
-      traits:values.traits,
-      requirements:values.requirements,
-      images:images
-    }
-    console.log('req.body', petInfo)
-    try{
-      const res = axios.post('/api/animals', petInfo)
-      const data = await res
-      console.log("adoptionPost",data)
+
+    const {
+      petName: name,
+      species,
+      breed,
+      gender,
+      story,
+      traits,
+      requirements,
+    } = values;
+    const dateOfBirth = dateFormat(values.dateOfBirth, "yyyy-mm-dd hh:mn:ss");
+    const photos = images;
+    console.log({name,
+      photos,
+      species,
+      breed,
+      dateOfBirth,
+      story,
+      traits,
+      requirements,
+      gender,})
+    try {
+      const res = await axios.post(`/api/animals`, {
+        name,
+        photos,
+        species,
+        breed,
+        dateOfBirth,
+        story,
+        traits,
+        requirements,
+        gender,
+      });
+      // const data = res
+      console.log("adoptionPost", res);
       resetForm();
-      return data
     } catch (err) {
-      console.log({ msg: 'something went wrong', details: err })
+      console.log({ msg: "something went wrong", details: err });
     }
   };
 

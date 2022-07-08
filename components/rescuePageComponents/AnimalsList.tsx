@@ -40,7 +40,7 @@ const AnimalsList: React.FC = () => {
   };
 
   if (!data) {
-    return <Loader />;
+    return <Loader />
   }
   return (
     <div className="w-full pb-8 bg-gray-100">

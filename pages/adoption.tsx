@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 const poster = "/assets/images/adoption-poster-4.jpg";
 const currentRoute = "/adoption";
 const AdoptionPost: React.FC = (props) => {
+  const isProtected = true
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
   // const dispatch = useAppDispatch();
@@ -19,9 +20,11 @@ const AdoptionPost: React.FC = (props) => {
   //   const condition = authContext?.isUserAuthenticated()
   //   if(!condition) router.push('/login');
   //  }, [authContext, router]);
-
+  
   return (
-    <Layout>
+    <Layout
+      isProtected={isProtected}
+    >
       <div className="grid min-h-screen text-gray-100 bg-teal-900 sm:grid-cols-1 lg:grid-cols-2 pt-9">
         <div className="flex flex-col items-center justify-start col-span-1 pt-5 pb-10">
           <div className="mt-0 md:mt-[2.5rem] w-4/5">

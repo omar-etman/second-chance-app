@@ -1,6 +1,6 @@
 import {PrismaClient} from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
-
+import moment from 'moment'
 // Fetch all posts (in /pages/api/posts.ts)
 const prisma = new PrismaClient()
 
@@ -18,24 +18,30 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   } else if (req.method === 'POST') {
 
     try {
-      const { name, images, species, breed, dateOfBirth, story, traits, requirements, gender} = req.body
+      const { name, photos, species, breed, dateOfBirth, story, traits, requirements, gender} = req.body
+      const petSpecies = await prisma.species.findFirst({
+        where: {name: species}
+      })
+      const speciesId = +petSpecies!.id
+      const birthDate = moment(dateOfBirth, 'YYYY-MM-DD hh:mm:ss').toDate()
+      console.log({name, photos, speciesId, breed, dateOfBirth, story, traits, requirements, gender,birthDate})
       const animal = await prisma.animal.create({
         data: {
           name,
-          species,
+          speciesId,
           breed,
           gender,
-          dateOfBirth,
+          dateOfBirth:birthDate,
           story,
           traits,
           requirements 
         },  
     })
-    for (let i=0; i<images.length; i++) {
+    for (let i=0; i<photos.length; i++) {
         const image = await prisma.image.create({
             data: {
                 animalId: +animal.id,
-                image: images[i]
+                image: photos[i]
             }
         })
         
@@ -43,7 +49,10 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     
       res.status(200).json({ msg: 'pet added', animal })
     } catch (err) {
+      console.log({err})
       res.status(400).json({ msg: 'something went wrong', details: err })
     }
   }
+
+  
 }
